@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <IsPackable>true</IsPackable>
     <DebugType>Full</DebugType>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
