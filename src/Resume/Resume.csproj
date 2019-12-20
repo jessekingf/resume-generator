@@ -3,6 +3,4 @@
     <OutputType>Exe</OutputType>
     <AssemblyName>resume</AssemblyName>
   </PropertyGroup>
-
-  <Import Project="..\Common.props" />
 </Project>
