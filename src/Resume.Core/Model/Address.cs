@@ -8,13 +8,13 @@ namespace Resume.Core.Model
     /// <summary>
     /// Contains address information.
     /// </summary>
-    public class Location
+    public class Address
     {
         /// <summary>
         /// Gets or sets the street address.
         /// </summary>
-        [JsonPropertyName("address")]
-        public string Address { get; set; }
+        [JsonPropertyName("street")]
+        public string Street { get; set; }
 
         /// <summary>
         /// Gets or sets the postal code.

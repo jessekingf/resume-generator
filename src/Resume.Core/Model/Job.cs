@@ -43,6 +43,12 @@ namespace Resume.Core.Model
         public string Summary { get; set; }
 
         /// <summary>
+        /// Gets or sets the address of the job position.
+        /// </summary>
+        [JsonPropertyName("location")]
+        public Address Location { get; set; }
+
+        /// <summary>
         /// Gets or sets the job highlights.
         /// </summary>
         [JsonPropertyName("highlights")]

@@ -41,7 +41,7 @@ namespace Resume.Core.Model
         /// Gets or sets the address of the applicant.
         /// </summary>
         [JsonPropertyName("location")]
-        public Location Address { get; set; }
+        public Address Location { get; set; }
 
         /// <summary>
         /// Gets or sets the personal website of the applicant.
@@ -62,12 +62,6 @@ namespace Resume.Core.Model
         public IList<string> Highlights { get; set; }
 
         /// <summary>
-        /// Gets or sets the profiles of the applicant.
-        /// </summary>
-        [JsonPropertyName("profiles")]
-        public IList<Profile> Profiles { get; set; }
-
-        /// <summary>
         /// Gets or sets the job experience of the applicant.
         /// </summary>
         [JsonPropertyName("work")]
@@ -77,12 +71,12 @@ namespace Resume.Core.Model
         /// Gets or sets the education details of the applicant.
         /// </summary>
         [JsonPropertyName("education")]
-        public IList<Education> Education { get; set; }
+        public IList<EducationProgram> Education { get; set; }
 
         /// <summary>
         /// Gets or sets the skills of the applicant.
         /// </summary>
         [JsonPropertyName("skills")]
-        public IList<string> Skills { get; set; }
+        public IList<Skill> Skills { get; set; }
     }
 }
