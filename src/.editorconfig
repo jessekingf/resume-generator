@@ -22,6 +22,10 @@ indent_size = 2
 [*.{json,xml}]
 indent_size = 2
 
+# Web files
+[*.{css,html}]
+indent_size = 2
+
 ###############################
 # .NET Coding Conventions     #
 ###############################

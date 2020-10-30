@@ -1,31 +1,44 @@
 #!/bin/bash
 set -e
-sln=../src/Resume.sln
-proj=../src/Resume/Resume.csproj
+
+# Build parameters
+src=../src
+sln=$src/Resume.sln
+mainProj=$src/Resume/Resume.csproj
+
+dist=../dist
+publishDir=$dist/Publish
+packagesDir=$dist/Packages
+coverageDir=$dist/Coverage
+
 config=Release
-runtime=win-x64
-dist=../dist/Resume
-exe=../src/Resume/
 
 # Clean
 echo Cleaning...
-rm -f -r $dist
-dotnet clean $sln -c $config -r $runtime
+rm -rf $dist
+dotnet clean "$sln" -c $config
 
 # Build
 echo Building solution...
-dotnet build  $sln -c $config -r $runtime --no-restore
+dotnet restore "$sln"
+dotnet build "$sln" -c $config --no-restore --no-incremental 
 
 # Run unit tests
 echo Running tests...
-dotnet test  $sln -c $config -r $runtime
+dotnet test "$sln" -c $config --no-restore --no-build --collect "XPlat Code Coverage" --results-directory "$coverageDir" --settings "$src/Coverlet.runsettings"
+if [ -d "$coverageDir" ]; then
+  reportgenerator -reports:"$coverageDir/*/*.xml" -targetdir:"$coverageDir" -reporttypes:HtmlSummary -title:"Unit Test Coverage"
+fi
+
+# Create packages
+echo Creating packages...
+dotnet pack "$sln" -c $config -o "$packagesDir" --no-restore --no-build
 
 # Create distribution
 echo Creating distribution...
-mkdir -p $dist
-dotnet publish $proj -c $config -r $runtime //p:PublishTrimmed=true //p:PublishReadyToRun=true //p:PublishSingleFile=true -o $dist
-cp ../LICENSE.txt $dist
-rm -f ../dist/Resume/*.pdb
+dotnet publish $mainProj -c $config -o "$publishDir" --no-restore --no-build --no-self-contained -p:PublishSingleFile=true
+cp ../LICENSE.txt "$publishDir"
+rm -f "$publishDir"/*.pdb
 
 # Build succeeded
 echo Build successful
