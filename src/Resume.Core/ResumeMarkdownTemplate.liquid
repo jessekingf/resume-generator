@@ -1,0 +1,50 @@
+﻿# {{ r.Name }}
+### {{ r.Label }}
+
+> [{{ r.Phone }}](tel:{{ r.Phone | remove: "-" }}) | [{{ r.Email }}](mailto:{{ r.Email }})  
+{% if r.Website != "" %}
+> [{{ r.Website }}]({{r.Website}})  
+{% endif %}
+> {{ r.Location.Street }}, {{ r.Location.City }}, {{ r.Location.Region }}, {{ r.Location.CountryCode }}, {{ r.Location.PostalCode }}
+
+## Professional Summary
+
+{% if r.Summary != "" %}
+{{r.Summary}}
+{% endif %}
+{% for highlight in r.Highlights %}
+- {{ highlight }}
+{% endfor %}
+
+## Work Experience
+
+{% for job in r.Work -%}
+**{{ job.Position }}**, {{ job.Company }}  
+{{ job.Location.City }}, {{ job.Location.Region }}, {{ job.Location.CountryCode }}  
+*{{ job.StartDate | date: "%b %Y" }} – {{ job.EndDate | date: "%b %Y" | default: "Present" }}*
+{% if job.Summary != "" %}
+
+{{ job.Summary }}
+{% endif %}
+{% for highlight in job.Highlights %}
+- {{ highlight }}
+{% endfor %}
+{{ "" }}
+{% endfor %}
+## Skills / Tools
+
+{% for skill in r.Skills %}
+- {{ skill.Name }} – {{ skill.Keywords | join: ", " }}
+{% endfor %}
+
+## Education
+
+{% for program in r.Education -%}
+**{{ program.Area }}, {{ program.StudyType }}**, {{ program.Institution }}  
+{{ program.Location.City }}, {{ program.Location.Region }}, {{ program.Location.CountryCode }}  
+*{{ program.StartDate | date: "%b %Y" }} – {{ program.EndDate | date: "%b %Y" | default: "Present" }}*
+{% for highlight in program.Highlights %}
+- {{ highlight }}
+{% endfor %}
+{{ "" }}
+{% endfor %}
