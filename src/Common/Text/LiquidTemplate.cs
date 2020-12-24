@@ -85,8 +85,10 @@ namespace Common.Text
                 throw new ArgumentNullException(nameof(type));
             }
 
-            // TODO: Use reflection to automatically register the types referenced by the top level type.
-            this.registeredTypes.Add(type);
+            if (!this.registeredTypes.Contains(type))
+            {
+                this.registeredTypes.Add(type);
+            }
         }
 
         /// <summary>

@@ -3,6 +3,7 @@
 
 namespace Common.Reflection
 {
+    using System;
     using System.IO;
     using System.Reflection;
 
@@ -11,6 +12,16 @@ namespace Common.Reflection
     /// </summary>
     public static class AssemblyHelper
     {
+        /// <summary>
+        /// Gets the directory of an assembly by a given type.
+        /// </summary>
+        /// <param name="type">The type to locate the assembly with.</param>
+        /// <returns>The directory the assembly is located in.</returns>
+        public static string GetAssemblyDirectory(Type type)
+        {
+            return Path.GetDirectoryName(Assembly.GetAssembly(type).Location);
+        }
+
         /// <summary>
         /// Gets the directory the process executable is located in.
         /// </summary>

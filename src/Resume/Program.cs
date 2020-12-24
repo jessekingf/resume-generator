@@ -18,7 +18,7 @@ namespace Resume
         /// <param name="args">The application arguments.</param>
         public static void Main(string[] args)
         {
-            // TODO: Proper argument parsing and error handling.
+            //// TODO: Proper argument parsing and error handling.
             if (args.Length != 2)
             {
                 Console.Error.Write("Invalid augments.");
@@ -27,6 +27,8 @@ namespace Resume
 
             string resumeJsonPath = Path.GetFullPath(args[0]);
             string outputPath = Path.GetFullPath(args[1]);
+
+            //// TODO: Validate parameters/paths.
 
             ResumeController resumeController = new ResumeController();
             resumeController.GenerateResume(resumeJsonPath, outputPath);

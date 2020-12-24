@@ -150,6 +150,24 @@ namespace Common.Tests.Text
         }
 
         /// <summary>
+        /// A test for the RegisterType method where the type being registered is a duplicate.
+        /// </summary>
+        [TestMethod]
+        public void RegisterType_DuplicateType_Ignored()
+        {
+            List<Type> expectedTypes = new List<Type>()
+            {
+                typeof(Person),
+            };
+
+            LiquidTemplate target = new LiquidTemplate();
+            target.RegisterType(typeof(Person));
+            target.RegisterType(typeof(Person)); // duplicate
+
+            CollectionAssert.AreEquivalent(expectedTypes, target.RegisteredTypes.ToList());
+        }
+
+        /// <summary>
         /// A test for the RegisterType method with a null type.
         /// </summary>
         [TestMethod]

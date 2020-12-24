@@ -4,13 +4,16 @@
 namespace Resume.Core.Tests
 {
     using System;
+    using System.IO;
     using Common.IO;
     using Common.Markdown;
     using Common.PDF;
+    using Common.Reflection;
     using Common.Serialization;
     using Common.Text;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
+    using Resume.Core.Model;
 
     /// <summary>
     /// A test fixture for the <see cref="ResumeController"/>  class.
@@ -144,7 +147,7 @@ namespace Resume.Core.Tests
         {
             // Setup the test.
             string resumeJsonPath = null;
-            string outputPath = @"c:\\another\\path";
+            string outputPath = @"c:\another\path";
             Mock<ITemplate> markdownTemplateMock = new Mock<ITemplate>();
 
             try
@@ -170,7 +173,7 @@ namespace Resume.Core.Tests
         {
             // Setup the test.
             string resumeJsonPath = string.Empty;
-            string outputPath = @"c:\\another\\path";
+            string outputPath = @"c:\another\path";
             Mock<ITemplate> markdownTemplateMock = new Mock<ITemplate>();
 
             try
@@ -195,7 +198,7 @@ namespace Resume.Core.Tests
         public void GenerateResume_NullOutputPath_Throws()
         {
             // Setup the test.
-            string resumeJsonPath = @"c:\\path\\resume.json";
+            string resumeJsonPath = @"c:\path\resume.json";
             string outputPath = null;
             Mock<ITemplate> markdownTemplateMock = new Mock<ITemplate>();
 
@@ -221,7 +224,7 @@ namespace Resume.Core.Tests
         public void GenerateResume_EmptyOutputPath_Throws()
         {
             // Setup the test.
-            string resumeJsonPath = @"c:\\path\\resume.json";
+            string resumeJsonPath = @"c:\path\resume.json";
             string outputPath = string.Empty;
             Mock<ITemplate> markdownTemplateMock = new Mock<ITemplate>();
 
@@ -247,8 +250,8 @@ namespace Resume.Core.Tests
         public void GenerateResume_NullTemplate_Throws()
         {
             // Setup the test.
-            string resumeJsonPath = @"c:\\path\\resume.json";
-            string outputPath = @"c:\\another\\path";
+            string resumeJsonPath = @"c:\path\resume.json";
+            string outputPath = @"c:\another\path";
             ITemplate markdownTemplate = null;
 
             try
@@ -261,6 +264,68 @@ namespace Resume.Core.Tests
             {
                 // Validate the results.
                 Assert.AreEqual(nameof(markdownTemplate), ex.ParamName);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// A test for GenerateResume where the JSON resume input is not found.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(FileNotFoundException))]
+        public void GenerateResume_JsonResumeNotFound_Throws()
+        {
+            // Setup the test.
+            string resumeJsonPath = @"c:\path\resume.json";
+            string outputPath = @"c:\another\path";
+            Mock<ITemplate> markdownTemplateMock = new Mock<ITemplate>();
+
+            this.fileSystemMock.Setup(fs => fs.FileExists(resumeJsonPath))
+                .Returns(false);
+            this.fileSystemMock.Setup(fs => fs.DirectoryExists(outputPath))
+                .Returns(true);
+
+            try
+            {
+                // Run the test.
+                ResumeController target = new ResumeController(this.serializer, this.markdownConverter, this.pdfGeneratorMock.Object, this.fileSystemMock.Object);
+                target.GenerateResume(resumeJsonPath, outputPath, markdownTemplateMock.Object);
+            }
+            catch (FileNotFoundException ex)
+            {
+                // Validate the results.
+                Assert.AreEqual(resumeJsonPath, ex.FileName);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// A test for GenerateResume where the output path is not found.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(DirectoryNotFoundException))]
+        public void GenerateResume_OutputPathNotFound_Throws()
+        {
+            // Setup the test.
+            string resumeJsonPath = @"c:\path\resume.json";
+            string outputPath = @"c:\another\path";
+            Mock<ITemplate> markdownTemplateMock = new Mock<ITemplate>();
+
+            this.fileSystemMock.Setup(fs => fs.FileExists(resumeJsonPath))
+                .Returns(true);
+            this.fileSystemMock.Setup(fs => fs.DirectoryExists(outputPath))
+                .Returns(false);
+
+            try
+            {
+                // Run the test.
+                ResumeController target = new ResumeController(this.serializer, this.markdownConverter, this.pdfGeneratorMock.Object, this.fileSystemMock.Object);
+                target.GenerateResume(resumeJsonPath, outputPath, markdownTemplateMock.Object);
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                // Validate the results.
+                Assert.AreEqual($"The output directory does not exist: {outputPath}", ex.Message);
                 throw;
             }
         }
