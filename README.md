@@ -11,7 +11,7 @@ A tool for generating a resume from JSON data into multiple formats:
 The following must be installed to run the application:
 
 1. [.NET Core 3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1)
-2. [Google Chrome](https://www.google.com/chrome/) web browser ( required for PDF generation).
+2. [Google Chrome](https://www.google.com/chrome/) web browser (required for PDF generation).
 
 ## Usage
 
@@ -23,3 +23,90 @@ The tool takes two parameters:
 ```shell
   resume.exe <json resume> <output directory>
 ```
+
+## Schema
+
+The JSON resume format:
+
+```json
+{
+  "name": "",
+  "label": "",
+  "email": "",
+  "phone": "",
+  "website": "",
+  "location": {
+    "street": "",
+    "city": "",
+    "region": "",
+    "countryCode": "",
+    "postalCode": ""
+  },
+  "summary": "",
+  "highlights": [
+    ""
+  ],
+  "skills": [
+    {
+      "name": "",
+      "keywords": [
+        ""
+      ]
+    }
+  ],
+  "work": [
+    {
+      "company": "",
+      "position": "",
+      "startDate": "",
+      "summary": "",
+      "location": {
+        "street": "",
+        "city": "",
+        "region": "",
+        "countryCode": "",
+        "postalCode": ""
+      },
+      "highlights": [
+        "",
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "",
+      "area": "",
+      "studyType": "",
+      "startDate": "",
+      "location": {
+        "street": "",
+        "city": "",
+        "region": "",
+        "countryCode": "",
+        "postalCode": ""
+      },
+      "highlights": [
+        ""
+      ]
+    }
+  ]
+}
+```
+
+## Example:
+
+Example JSON input and generated markdown, HTML, and PDF resumes:
+
+- **JSON** - [JohnDoeResume.json](Example/JohnDoeResume.json)
+- **Markdown** - [JohnDoeResume.md](Example/JohnDoeResume.md)
+- **HTML** - [JohnDoeResume.html](Example/JohnDoeResume.html)
+- **PDF** - [JohnDoeResume.pdf](Example/JohnDoeResume.pdf)
+
+## TODO
+
+Future enhancements for the tool:
+
+- Command-line switches for the resume formats
+- Command-line switch to generate the resume with sensitive data or not (address, phone number, etc.)
+- Support for generating a references page
+- Expose the templates to allow them to be customized

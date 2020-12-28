@@ -1,0 +1,155 @@
+{
+  "name": "John Doe",
+  "label": "Senior Software Developer",
+  "email": "john@email.com",
+  "phone": "555-555-5555",
+  "website": "http://johndoe.com",
+  "location": {
+    "street": "290 Bremner Blvd",
+    "city": "Toronto",
+    "region": "Ontario",
+    "countryCode": "CA",
+    "postalCode": "M5V 3L9"
+  },
+  "summary": "A profession summary/profile can go here with some career highlights listed below, both of which are optional.",
+  "highlights": [
+    "10+ years of experience",
+    "Full stack software developer",
+    "Experienced database developer",
+    "Etc."
+  ],
+  "skills": [
+    {
+      "name": "Programming Languages",
+      "keywords": [
+        "C#",
+        "C++",
+        "Java"
+      ]
+    },
+    {
+      "name": "Web Development",
+      "keywords": [
+        "JavaScript",
+        "Angular",
+        "HTML",
+        "CSS",
+        "Javascript"
+      ]
+    },
+    {
+      "name": "Databases",
+      "keywords": [
+        "Microsoft SQL Server",
+        "Oracle",
+        "SQLite"
+      ]
+    },
+    {
+      "name": "Cloud Technologies",
+      "keywords": [
+        "Microsoft Azure",
+        "AWS",
+        "Kubernetes"
+      ]
+    },
+    {
+      "name": "SDLC",
+      "keywords": [
+        "Git",
+        "GitHub",
+        "Bitbucket",
+        "JIRA"
+      ]
+    }
+  ],
+  "work": [
+    {
+      "company": "Company Name",
+      "position": "Senior Software Developer",
+      "startDate": "2014-01-01",
+      "summary": "A description/summary of the job position with some highlights listed below (both optional).",
+      "location": {
+        "street": "290 Bremner Blvd",
+        "city": "Toronto",
+        "region": "Ontario",
+        "countryCode": "CA",
+        "postalCode": "M5V 3L9"
+      },
+      "highlights": [
+        "Started the company",
+        "Worked on some awesome project",
+        "Improved performance on a thing",
+        "etc."
+      ]
+    },
+    {
+      "company": "Another Company",
+      "position": "Software Developer",
+      "startDate": "2008-01-01",
+      "endDate": "2014-01-01",
+      "summary": "",
+      "location": {
+        "street": "290 Bremner Blvd",
+        "city": "Toronto",
+        "region": "Ontario",
+        "countryCode": "CA",
+        "postalCode": "M5V 3L9"
+      },
+      "highlights": [
+        "Some more impressive stuff",
+        "Programming once in a while",
+        "More stuff",
+        "etc."
+      ]
+    },
+    {
+      "company": "Yet another company",
+      "position": "Junior Software Developer",
+      "startDate": "2004-01-01",
+      "endDate": "2008-01-01",
+      "summary": "A quick description...",
+      "location": {
+        "street": "290 Bremner Blvd",
+        "city": "Toronto",
+        "region": "Ontario",
+        "countryCode": "CA",
+        "postalCode": "M5V 3L9"
+      }
+    }
+  ],
+  "education": [
+    {
+      "institution": "A University",
+      "area": "Computer Science",
+      "studyType": "Master",
+      "startDate": "2018-01-01",
+      "location": {
+        "street": "290 Bremner Blvd",
+        "city": "Toronto",
+        "region": "Ontario",
+        "countryCode": "CA",
+        "postalCode": "M5V 3L9"
+      },
+      "highlights": [
+        "4.0 GPA",
+        "Internship",
+        "Etc."
+      ]
+    },
+    {
+      "institution": "Another University",
+      "area": "Computer Science",
+      "studyType": "Bachelor",
+      "startDate": "2000-01-01",
+      "endDate": "2004-01-01",
+      "location": {
+        "street": "290 Bremner Blvd",
+        "city": "Toronto",
+        "region": "Ontario",
+        "countryCode": "CA",
+        "postalCode": "M5V 3L9"
+      }
+    }
+  ]
+}
