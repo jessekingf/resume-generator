@@ -8,12 +8,10 @@ namespace Resume.Core.Tests
     using Common.IO;
     using Common.Markdown;
     using Common.PDF;
-    using Common.Reflection;
     using Common.Serialization;
     using Common.Text;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
-    using Resume.Core.Model;
 
     /// <summary>
     /// A test fixture for the <see cref="ResumeController"/>  class.
