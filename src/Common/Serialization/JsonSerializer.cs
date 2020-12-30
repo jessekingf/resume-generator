@@ -13,19 +13,19 @@ namespace Common.Serialization
         /// <summary>
         /// Parses JSON text into an instance of <typeparamref name="T" />.
         /// </summary>
-        /// <param name='json'>The JSON text to parse.</param>
+        /// <param name='text'>The JSON text to parse.</param>
         /// <returns>
         /// An instance of <typeparamref name="T" /> parsed from the JSON text.
         /// </returns>
         /// <typeparam name="T">The type of object being deserialized.</typeparam>
-        public T Deserialize<T>(string json)
+        public T Deserialize<T>(string text)
         {
-            if (string.IsNullOrEmpty(json))
+            if (string.IsNullOrEmpty(text))
             {
-                throw new ArgumentException("The value cannot be null or empty.", nameof(json));
+                throw new ArgumentException("The value cannot be null or empty.", nameof(text));
             }
 
-            return System.Text.Json.JsonSerializer.Deserialize<T>(json);
+            return System.Text.Json.JsonSerializer.Deserialize<T>(text);
         }
 
         /// <summary>

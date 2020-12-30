@@ -16,7 +16,7 @@ namespace Common.Text
         /// <summary>
         /// Cached liquid template.
         /// </summary>
-        private FluidTemplate fluidTemplate = null;
+        private FluidTemplate fluidTemplate;
 
         /// <summary>
         /// The types registered with the templates.

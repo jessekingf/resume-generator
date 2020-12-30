@@ -20,11 +20,11 @@ namespace Common.Tests.Serialization
         public void Deserialize_ValidInput_ObjectDeserialized()
         {
             // Setup the test.
-            string json = @"{""propertyOne"":""This is a property to serialize."",""propertyTwo"":""This is another property to serialize.""}";
+            string text = @"{""propertyOne"":""This is a property to serialize."",""propertyTwo"":""This is another property to serialize.""}";
 
             // Run the test.
             JsonSerializer serializer = new JsonSerializer();
-            SerializableTestObject results = serializer.Deserialize<SerializableTestObject>(json);
+            SerializableTestObject results = serializer.Deserialize<SerializableTestObject>(text);
 
             // Validate the results.
             Assert.AreEqual("This is a property to serialize.", results.PropertyOne);
@@ -38,19 +38,19 @@ namespace Common.Tests.Serialization
         [ExpectedException(typeof(ArgumentException))]
         public void Deserialize_NullJson_ThrowsArgumentException()
         {
+            // Setup the test.
+            string text = null;
+
             try
             {
-                // Setup the test.
-                string json = null;
-
                 // Run the test.
                 JsonSerializer serializer = new JsonSerializer();
-                serializer.Deserialize<SerializableTestObject>(json);
+                serializer.Deserialize<SerializableTestObject>(text);
             }
             catch (ArgumentException ex)
             {
                 // Validate the results.
-                Assert.AreEqual("json", ex.ParamName);
+                Assert.AreEqual(nameof(text), ex.ParamName);
                 throw;
             }
         }
@@ -62,19 +62,19 @@ namespace Common.Tests.Serialization
         [ExpectedException(typeof(ArgumentException))]
         public void Deserialize_EmptyJson_ThrowsArgumentException()
         {
+            // Setup the test.
+            string text = string.Empty;
+
             try
             {
-                // Setup the test.
-                string json = string.Empty;
-
                 // Run the test.
                 JsonSerializer serializer = new JsonSerializer();
-                serializer.Deserialize<SerializableTestObject>(json);
+                serializer.Deserialize<SerializableTestObject>(text);
             }
             catch (ArgumentException ex)
             {
                 // Validate the results.
-                Assert.AreEqual("json", ex.ParamName);
+                Assert.AreEqual(nameof(text), ex.ParamName);
                 throw;
             }
         }

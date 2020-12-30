@@ -1,16 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj" />
+    <None Remove="Resume.css" />
+    <None Remove="ResumeHtmlTemplate.html" />
+    <None Remove="ResumeMarkdownTemplate.liquid" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="Resume.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="ResumeHtmlTemplate.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="ResumeMarkdownTemplate.liquid">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <EmbeddedResource Include="Resume.css" />
+    <EmbeddedResource Include="ResumeHtmlTemplate.html" />
+    <EmbeddedResource Include="ResumeMarkdownTemplate.liquid" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
   </ItemGroup>
 </Project>

@@ -17,7 +17,7 @@ namespace Common.Tests.Threading
         /// <summary>
         /// Whether the test method was called.
         /// </summary>
-        private bool methodRun = false;
+        private bool methodRun;
 
         /// <summary>
         /// Initialization run before each test.

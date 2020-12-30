@@ -10,7 +10,7 @@ A tool for generating a resume from JSON data into multiple formats:
 
 The following must be installed to run the application:
 
-1. [.NET Core 3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1)
+1. [.NET 5.0 Runtime](https://dotnet.microsoft.com/download/dotnet/5.0)
 2. [Google Chrome](https://www.google.com/chrome/) web browser (required for PDF generation).
 
 ## Usage
@@ -93,7 +93,7 @@ The JSON resume format:
 }
 ```
 
-## Example:
+## Example
 
 Example JSON input and generated markdown, HTML, and PDF resumes:
 

@@ -4,11 +4,13 @@
 namespace Resume.Core
 {
     using System;
+    using System.Globalization;
     using System.IO;
+    using System.Reflection;
+    using Common.Extensions;
     using Common.IO;
     using Common.Markdown;
     using Common.PDF;
-    using Common.Reflection;
     using Common.Serialization;
     using Common.Text;
     using Resume.Core.Model;
@@ -89,8 +91,7 @@ namespace Resume.Core
         public void GenerateResume(string resumeJsonPath, string outputPath)
         {
             // The resume template is not provided; so create and use the default template.
-            string templatePath = Path.Combine(AssemblyHelper.GetAssemblyDirectory(this.GetType()), DefaultMarkdownTemplateName);
-            string templateText = this.fileSystem.ReadAllText(templatePath);
+            string templateText = Assembly.GetExecutingAssembly().ReadResourceFile(DefaultMarkdownTemplateName);
             ITemplate template = new LiquidTemplate(templateText);
 
             // Register the model types with the template.
@@ -180,35 +181,32 @@ namespace Resume.Core
         private void GenerateHtmlResume(string markdown, string title, string path, bool externalCss = false)
         {
             // Load the HTML template.
-            string executablePath = AssemblyHelper.GetAssemblyDirectory(this.GetType());
-            string templatePath = Path.Combine(executablePath, DefaultHtmlTemplateName);
-            string templateText = this.fileSystem.ReadAllText(templatePath);
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            string templateText = assembly.ReadResourceFile(DefaultHtmlTemplateName);
+            string cssContent = assembly.ReadResourceFile(DefaultCssFileName);
 
             // Convert the markdown to HTML.
             string htmlContent = this.markdownConverter.ToHtml(markdown);
 
             // Set the styles.
             string styleElement;
-            string cssPath = Path.Combine(executablePath, DefaultCssFileName);
             if (externalCss)
             {
                 // Save the HTML file with the default standalone CSS file.
                 styleElement = $"<link rel=\"stylesheet\" href=\"{DefaultCssFileName}\" />";
-                this.fileSystem.CopyFile(
-                    cssPath,
+                this.fileSystem.WriteAllText(
                     Path.Combine(Path.GetDirectoryName(path), DefaultCssFileName),
-                    true);
+                    cssContent);
             }
             else
             {
                 // Embed the styles in the HTML.
-                string styles = this.fileSystem.ReadAllText(cssPath)
-                    .TrimEnd(Environment.NewLine.ToCharArray());
+                string styles = cssContent.TrimEnd(Environment.NewLine.ToCharArray());
                 styleElement = $"<style>{Environment.NewLine}{styles}{Environment.NewLine}</style>";
             }
 
             // Save the final HTML file.
-            string html = string.Format(templateText, title, styleElement, htmlContent);
+            string html = string.Format(CultureInfo.InvariantCulture, templateText, title, styleElement, htmlContent);
             this.fileSystem.WriteAllText(path, html);
         }
     }

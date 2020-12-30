@@ -6,7 +6,6 @@ namespace Common.PDF
     using System;
     using System.IO;
     using System.Threading.Tasks;
-    using Common.Reflection;
     using Common.Threading;
     using Microsoft.Win32;
     using PuppeteerSharp;
@@ -115,7 +114,7 @@ namespace Common.PDF
             }
 
             // Download a copy of Chrome.
-            string downloadFolder = Path.Combine(AssemblyHelper.GetEntryAssemblyDirectory(), ChromeDownloadFolder);
+            string downloadFolder = Path.Combine(AppContext.BaseDirectory, ChromeDownloadFolder);
             return await this.DownloadChrome(downloadFolder);
         }
 
