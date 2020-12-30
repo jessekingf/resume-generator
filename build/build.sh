@@ -7,7 +7,7 @@ sln=$src/Resume.sln
 mainProj=$src/Resume/Resume.csproj
 
 dist=../dist
-publishDir=$dist/Publish
+publishDir=$dist/Publish/ResumeGenerator
 packagesDir=$dist/Packages
 coverageDir=$dist/Coverage
 
@@ -38,7 +38,9 @@ dotnet pack "$sln" -c $config -o "$packagesDir" --no-restore --no-build
 echo Creating distribution...
 dotnet publish $mainProj -c $config -o "$publishDir" -r win-x64 -p:PublishSingleFile=true --self-contained false
 cp ../LICENSE.txt "$publishDir"
+cp -r ../Example "$publishDir"
 rm -f "$publishDir"/*.pdb
+rm -f "$publishDir"/*.xml
 
 # Build succeeded
 echo Build successful
