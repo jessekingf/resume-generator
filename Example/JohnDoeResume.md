@@ -3,7 +3,7 @@
 
 > [555-555-5555](tel:5555555555) | [john@email.com](mailto:john@email.com)  
 > [http://johndoe.com](http://johndoe.com)  
-> 290 Bremner Blvd, Toronto, Ontario, CA, M5V 3L9
+> 290 Bremner Blvd, Toronto, Ontario, M5V 3L9
 
 ## Professional Summary
 
@@ -16,7 +16,7 @@ A profession summary/profile can go here with some career highlights listed belo
 ## Work Experience
 
 **Senior Software Developer**, Company Name  
-Toronto, Ontario, CA  
+Toronto, Ontario  
 *Jan 2014 – Present*
 
 A description/summary of the job position with some highlights listed below (both optional).
@@ -26,7 +26,7 @@ A description/summary of the job position with some highlights listed below (bot
 - etc.
 
 **Software Developer**, Another Company  
-Toronto, Ontario, CA  
+Toronto, Ontario  
 *Jan 2008 – Jan 2014*
 - Some more impressive stuff
 - Programming once in a while
@@ -34,7 +34,7 @@ Toronto, Ontario, CA
 - etc.
 
 **Junior Software Developer**, Yet another company  
-Toronto, Ontario, CA  
+Toronto, Ontario  
 *Jan 2004 – Jan 2008*
 
 A quick description...
@@ -42,7 +42,7 @@ A quick description...
 ## Skills / Tools
 
 - Programming Languages – C#, C++, Java
-- Web Development – JavaScript, Angular, HTML, CSS, Javascript
+- Web Development – JavaScript, Angular, HTML, CSS
 - Databases – Microsoft SQL Server, Oracle, SQLite
 - Cloud Technologies – Microsoft Azure, AWS, Kubernetes
 - SDLC – Git, GitHub, Bitbucket, JIRA
@@ -50,13 +50,13 @@ A quick description...
 ## Education
 
 **Computer Science, Master**, A University  
-Toronto, Ontario, CA  
+Toronto, Ontario  
 *Jan 2018 – Present*
 - 4.0 GPA
 - Internship
 - Etc.
 
 **Computer Science, Bachelor**, Another University  
-Toronto, Ontario, CA  
+Toronto, Ontario  
 *Jan 2000 – Jan 2004*
 

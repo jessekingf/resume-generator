@@ -5,7 +5,7 @@
 {% if r.Website != "" %}
 > [{{ r.Website }}]({{r.Website}})  
 {% endif %}
-> {{ r.Location.Street }}, {{ r.Location.City }}, {{ r.Location.Region }}, {{ r.Location.CountryCode }}, {{ r.Location.PostalCode }}
+> {{ r.Location.Street }}, {{ r.Location.City }}, {{ r.Location.Region }}, {{ r.Location.PostalCode }}
 
 ## Professional Summary
 
@@ -20,7 +20,7 @@
 
 {% for job in r.Work -%}
 **{{ job.Position }}**, {{ job.Company }}  
-{{ job.Location.City }}, {{ job.Location.Region }}, {{ job.Location.CountryCode }}  
+{{ job.Location.City }}, {{ job.Location.Region }}  
 *{{ job.StartDate | date: "%b %Y" }} – {{ job.EndDate | date: "%b %Y" | default: "Present" }}*
 {% if job.Summary != "" %}
 
@@ -41,7 +41,7 @@
 
 {% for program in r.Education -%}
 **{{ program.Area }}, {{ program.StudyType }}**, {{ program.Institution }}  
-{{ program.Location.City }}, {{ program.Location.Region }}, {{ program.Location.CountryCode }}  
+{{ program.Location.City }}, {{ program.Location.Region }}  
 *{{ program.StartDate | date: "%b %Y" }} – {{ program.EndDate | date: "%b %Y" | default: "Present" }}*
 {% for highlight in program.Highlights %}
 - {{ highlight }}
