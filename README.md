@@ -15,13 +15,20 @@ The following must be installed to run the application:
 
 ## Usage
 
-The tool takes two parameters:
+The application takes two arguments:
 
 1. The source JSON file with the resume data.
 2. The directory to place the generated resumes.
 
 ```shell
-  resume.exe <json resume> <output directory>
+  resume.exe [options] <json resume> <output directory>
+```
+
+Options:
+
+```shell
+-v, --version  Display the application version
+-h, --help     Display the help
 ```
 
 ## Schema
@@ -97,16 +104,7 @@ The JSON resume format:
 
 Example JSON input and generated markdown, HTML, and PDF resumes:
 
-- **JSON** - [JohnDoeResume.json](Example/JohnDoeResume.json)
-- **Markdown** - [JohnDoeResume.md](Example/JohnDoeResume.md)
-- **HTML** - [JohnDoeResume.html](Example/JohnDoeResume.html)
-- **PDF** - [JohnDoeResume.pdf](Example/JohnDoeResume.pdf)
-
-## TODO
-
-Future enhancements for the tool:
-
-- Command-line switches for the resume formats
-- Command-line switch to generate the resume with sensitive data or not (address, phone number, etc.)
-- Support for generating a references page
-- Expose the templates to allow them to be customized
+- **JSON** – [JohnDoeResume.json](Example/JohnDoeResume.json)
+- **Markdown** – [JohnDoeResume.md](Example/JohnDoeResume.md)
+- **HTML** – [JohnDoeResume.html](Example/JohnDoeResume.html)
+- **PDF** – [JohnDoeResume.pdf](Example/JohnDoeResume.pdf)
