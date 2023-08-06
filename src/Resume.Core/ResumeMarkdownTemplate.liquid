@@ -1,7 +1,7 @@
 ﻿# {{ r.Name }}
 ### {{ r.Label }}
 
-> [{{ r.Phone }}](tel:{{ r.Phone | remove: "-" }}) | [{{ r.Email }}](mailto:{{ r.Email }})  
+> [{{ r.Email }}](mailto:{{ r.Email }}) | [{{ r.Phone }}](tel:{{ r.Phone | remove: "-" }})  
 {% if r.Website != "" %}
 > [{{ r.Website }}]({{r.Website}})  
 {% endif %}
@@ -19,8 +19,10 @@
 ## Work Experience
 
 {% for job in r.Work -%}
-**{{ job.Position }}**, {{ job.Company }}  
+**{{ job.Position }}**, _**{{ job.Company }}**_  
+{% if job.Location != nil %}
 {{ job.Location.City }}, {{ job.Location.Region }}  
+{% endif %}
 *{{ job.StartDate | date: "%b %Y" }} – {{ job.EndDate | date: "%b %Y" | default: "Present" }}*
 {% if job.Summary != "" %}
 
@@ -40,8 +42,10 @@
 ## Education
 
 {% for program in r.Education -%}
-**{{ program.Area }}, {{ program.StudyType }}**, {{ program.Institution }}  
+**{{ program.Area }}**, **{{ program.StudyType }}**, **_{{ program.Institution }}_**  
+{% if job.Location != nil %}
 {{ program.Location.City }}, {{ program.Location.Region }}  
+{% endif %}
 *{{ program.StartDate | date: "%b %Y" }} – {{ program.EndDate | date: "%b %Y" | default: "Present" }}*
 {% for highlight in program.Highlights %}
 - {{ highlight }}
