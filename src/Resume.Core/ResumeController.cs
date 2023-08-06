@@ -38,28 +38,28 @@ namespace Resume.Core
         /// <summary>
         /// The serializer to load the resume data with.
         /// </summary>
-        private ISerializer serializer;
+        private readonly ISerializer serializer;
 
         /// <summary>
         /// Handles converting Markdown.
         /// </summary>
-        private IMarkdownConverter markdownConverter;
+        private readonly IMarkdownConverter markdownConverter;
 
         /// <summary>
         /// PDF document generator.
         /// </summary>
-        private IPdfGenerator pdfGenerator;
+        private readonly IPdfGenerator pdfGenerator;
 
         /// <summary>
         /// Used to read and save documents from the file system.
         /// </summary>
-        private IFileSystem fileSystem;
+        private readonly IFileSystem fileSystem;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ResumeController"/> class.
         /// </summary>
         public ResumeController()
-            : this(new JsonSerializer(), new MarkdownConverter(), new ChromePdfGenerator(), new FileSystem())
+            : this(new JsonSerializer(), new MarkdownConverter(), new ChromiumPdfGenerator(), new FileSystem())
         {
         }
 

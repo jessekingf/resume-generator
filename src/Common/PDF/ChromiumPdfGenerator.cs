@@ -11,10 +11,16 @@ namespace Common.PDF
     using PuppeteerSharp;
 
     /// <summary>
-    /// Provides functionality for generating PDF documents using the Chrome web browser.
+    /// Provides functionality for generating PDF documents using a Chromium-based
+    /// web browser in headless mode.
     /// </summary>
-    public class ChromePdfGenerator : IPdfGenerator
+    public class ChromiumPdfGenerator : IPdfGenerator
     {
+        /// <summary>
+        /// The location of the Edge web browser installation.
+        /// </summary>
+        private const string EdgePath = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe";
+
         /// <summary>
         /// The registry key to check whether Chrome is installed.
         /// </summary>
@@ -26,28 +32,28 @@ namespace Common.PDF
         private const string ChromeRegistryValue = "InstallLocation";
 
         /// <summary>
-        /// The Chrome executable name.
+        /// The name of the Chome web browser executable.
         /// </summary>
         private const string ChromeExecutible = "chrome.exe";
 
         /// <summary>
         /// The folder name to download Chrome to.
         /// </summary>
-        private const string ChromeDownloadFolder = ".local-chromium";
+        private const string ChromiumDownloadFolder = ".local-chromium";
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ChromePdfGenerator"/> class.
+        /// Initializes a new instance of the <see cref="ChromiumPdfGenerator"/> class.
         /// </summary>
-        public ChromePdfGenerator()
+        public ChromiumPdfGenerator()
             : this(false)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ChromePdfGenerator"/> class.
+        /// Initializes a new instance of the <see cref="ChromiumPdfGenerator"/> class.
         /// </summary>
         /// <param name="downloadEnabled">Whether to download Chrome if it is not installed.</param>
-        public ChromePdfGenerator(bool downloadEnabled)
+        public ChromiumPdfGenerator(bool downloadEnabled)
         {
             this.DownloadEnabled = downloadEnabled;
         }
@@ -83,7 +89,7 @@ namespace Common.PDF
 
         private async Task ToPdfAsync(string htmlPath, string pdfPath)
         {
-            string chromePath = await this.GetChromePath();
+            string chromePath = await this.GetChromiumPath();
             LaunchOptions options = new LaunchOptions()
             {
                 ExecutablePath = chromePath,
@@ -98,10 +104,16 @@ namespace Common.PDF
             }
         }
 
-        private async Task<string> GetChromePath()
+        private async Task<string> GetChromiumPath()
         {
+            // Check if Edge is already installed (typically available on most Windows installs).
+            if (File.Exists(EdgePath))
+            {
+                return EdgePath;
+            }
+
             // Check if Chrome is already installed.
-            string chromePath = this.GetInstalledCrhomePath();
+            string chromePath = this.GetInstalledChromePath();
             if (!string.IsNullOrEmpty(chromePath))
             {
                 return chromePath;
@@ -110,15 +122,15 @@ namespace Common.PDF
             // Chrome not installed, check if download is enabled.
             if (!this.DownloadEnabled)
             {
-                throw new InvalidOperationException("Chrome is not installed and downloading it is not enabled.");
+                throw new InvalidOperationException("Chrome is not installed and downloading it is disabled.");
             }
 
-            // Download a copy of Chrome.
-            string downloadFolder = Path.Combine(AppContext.BaseDirectory, ChromeDownloadFolder);
-            return await this.DownloadChrome(downloadFolder);
+            // Download a copy of Chromium.
+            string downloadFolder = Path.Combine(AppContext.BaseDirectory, ChromiumDownloadFolder);
+            return await this.DownloadChromium(downloadFolder);
         }
 
-        private string GetInstalledCrhomePath()
+        private string GetInstalledChromePath()
         {
             string chromePath = Registry.GetValue(ChromeRegistryKey, ChromeRegistryValue, null) as string;
             if (string.IsNullOrEmpty(chromePath))
@@ -135,7 +147,7 @@ namespace Common.PDF
             return chromePath;
         }
 
-        private async Task<string> DownloadChrome(string path)
+        private async Task<string> DownloadChromium(string path)
         {
             BrowserFetcherOptions options = new BrowserFetcherOptions()
             {
