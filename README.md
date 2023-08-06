@@ -10,8 +10,10 @@ A tool for generating a resume from JSON data into multiple formats:
 
 The following must be installed to run the application:
 
-1. [.NET 5.0 Runtime](https://dotnet.microsoft.com/download/dotnet/5.0)
-2. [Google Chrome](https://www.google.com/chrome/) web browser (required for PDF generation).
+1. [.NET 6.0 Runtime](https://dotnet.microsoft.com/download/dotnet/5.0)
+2. One of the following web browsers (required for PDF generation):
+   a. [Microsoft Edge](https://www.microsoft.com/en-us/edge/download)
+   b. [Google Chrome](https://www.google.com/chrome/)
 
 ## Usage
 
@@ -104,7 +106,7 @@ The JSON resume format:
 
 Example JSON input and generated markdown, HTML, and PDF resumes:
 
-- **JSON** – [JohnDoeResume.json](Example/JohnDoeResume.json)
-- **Markdown** – [JohnDoeResume.md](Example/JohnDoeResume.md)
-- **HTML** – [JohnDoeResume.html](Example/JohnDoeResume.html)
-- **PDF** – [JohnDoeResume.pdf](Example/JohnDoeResume.pdf)
+- **JSON** - [JohnDoeResume.json](Example/JohnDoeResume.json)
+- **Markdown** - [JohnDoeResume.md](Example/JohnDoeResume.md)
+- **HTML** - [JohnDoeResume.html](Example/JohnDoeResume.html)
+- **PDF** - [JohnDoeResume.pdf](Example/JohnDoeResume.pdf)
