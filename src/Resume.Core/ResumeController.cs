@@ -1,7 +1,4 @@
-﻿// Licensed under the MIT License.
-// See LICENSE.txt in the project root for license information.
-
-namespace Resume.Core;
+﻿namespace Resume.Core;
 
 using System;
 using System.Globalization;
@@ -59,8 +56,9 @@ public class ResumeController
     /// Initializes a new instance of the <see cref="ResumeController"/> class.
     /// </summary>
     public ResumeController()
-        : this(new JsonSerializer(), new MarkdownConverter(), new ChromiumPdfGenerator(), new FileSystem())
+        : this(new JsonSerializer(), new MarkdownConverter(), new ChromiumPdfGeneratorLinux(), new FileSystem())
     {
+        // TODO: Setup proper DI to inject the Windows or Linux based generator accordingly.
     }
 
     /// <summary>

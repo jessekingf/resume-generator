@@ -1,43 +1,39 @@
-﻿// Licensed under the MIT License.
-// See LICENSE.txt in the project root for license information.
+﻿namespace Resume.Core.Model;
 
-namespace Resume.Core.Model
+using System.Text.Json.Serialization;
+
+/// <summary>
+/// Contains address information.
+/// </summary>
+public class Address
 {
-    using System.Text.Json.Serialization;
+    /// <summary>
+    /// Gets or sets the street address.
+    /// </summary>
+    [JsonPropertyName("street")]
+    public string Street { get; set; }
 
     /// <summary>
-    /// Contains address information.
+    /// Gets or sets the postal code.
     /// </summary>
-    public class Address
-    {
-        /// <summary>
-        /// Gets or sets the street address.
-        /// </summary>
-        [JsonPropertyName("street")]
-        public string Street { get; set; }
+    [JsonPropertyName("postalCode")]
+    public string PostalCode { get; set; }
 
-        /// <summary>
-        /// Gets or sets the postal code.
-        /// </summary>
-        [JsonPropertyName("postalCode")]
-        public string PostalCode { get; set; }
+    /// <summary>
+    /// Gets or sets the city.
+    /// </summary>
+    [JsonPropertyName("city")]
+    public string City { get; set; }
 
-        /// <summary>
-        /// Gets or sets the city.
-        /// </summary>
-        [JsonPropertyName("city")]
-        public string City { get; set; }
+    /// <summary>
+    /// Gets or sets the country code.
+    /// </summary>
+    [JsonPropertyName("countryCode")]
+    public string CountryCode { get; set; }
 
-        /// <summary>
-        /// Gets or sets the country code.
-        /// </summary>
-        [JsonPropertyName("countryCode")]
-        public string CountryCode { get; set; }
-
-        /// <summary>
-        /// Gets or sets the region.
-        /// </summary>
-        [JsonPropertyName("region")]
-        public string Region { get; set; }
-    }
+    /// <summary>
+    /// Gets or sets the region.
+    /// </summary>
+    [JsonPropertyName("region")]
+    public string Region { get; set; }
 }

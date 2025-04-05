@@ -1,47 +1,43 @@
-﻿// Licensed under the MIT License.
-// See LICENSE.txt in the project root for license information.
+﻿namespace Common.Serialization;
 
-namespace Common.Serialization
+using System;
+
+/// <summary>
+/// Provides functionality to serialize objects to JSON and to deserialize JSON into objects.
+/// </summary>
+public class JsonSerializer : ISerializer
 {
-    using System;
+    /// <summary>
+    /// Parses JSON text into an instance of <typeparamref name="T" />.
+    /// </summary>
+    /// <param name='text'>The JSON text to parse.</param>
+    /// <returns>
+    /// An instance of <typeparamref name="T" /> parsed from the JSON text.
+    /// </returns>
+    /// <typeparam name="T">The type of object being deserialized.</typeparam>
+    public T Deserialize<T>(string text)
+    {
+        if (string.IsNullOrEmpty(text))
+        {
+            throw new ArgumentException("The value cannot be null or empty.", nameof(text));
+        }
+
+        return System.Text.Json.JsonSerializer.Deserialize<T>(text);
+    }
 
     /// <summary>
-    /// Provides functionality to serialize objects to JSON and to deserialize JSON into objects.
+    /// Converts an instance of <typeparamref name="T" /> to JSON text.
     /// </summary>
-    public class JsonSerializer : ISerializer
+    /// <param name='value'>The <typeparamref name="T" /> to serialize.</param>
+    /// <returns>The JSON text representation the instance of <typeparamref name="T" />.</returns>
+    /// <typeparam name="T">The type of object being serialized.</typeparam>
+    public string Serialize<T>(T value)
     {
-        /// <summary>
-        /// Parses JSON text into an instance of <typeparamref name="T" />.
-        /// </summary>
-        /// <param name='text'>The JSON text to parse.</param>
-        /// <returns>
-        /// An instance of <typeparamref name="T" /> parsed from the JSON text.
-        /// </returns>
-        /// <typeparam name="T">The type of object being deserialized.</typeparam>
-        public T Deserialize<T>(string text)
+        if (value == null)
         {
-            if (string.IsNullOrEmpty(text))
-            {
-                throw new ArgumentException("The value cannot be null or empty.", nameof(text));
-            }
-
-            return System.Text.Json.JsonSerializer.Deserialize<T>(text);
+            throw new ArgumentNullException(nameof(value));
         }
 
-        /// <summary>
-        /// Converts an instance of <typeparamref name="T" /> to JSON text.
-        /// </summary>
-        /// <param name='value'>The <typeparamref name="T" /> to serialize.</param>
-        /// <returns>The JSON text representation the instance of <typeparamref name="T" />.</returns>
-        /// <typeparam name="T">The type of object being serialized.</typeparam>
-        public string Serialize<T>(T value)
-        {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
-
-            return System.Text.Json.JsonSerializer.Serialize<T>(value);
-        }
+        return System.Text.Json.JsonSerializer.Serialize<T>(value);
     }
 }

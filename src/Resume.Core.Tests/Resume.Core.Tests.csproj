@@ -1,8 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <PackageReference Include="Moq" Version="4.15.2" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Resume.Core\Resume.Core.csproj" />
   </ItemGroup>
 </Project>

@@ -1,62 +1,58 @@
-﻿// Licensed under the MIT License.
-// See LICENSE.txt in the project root for license information.
+﻿namespace Common.Threading;
 
-namespace Common.Threading
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+
+/// <summary>
+/// Helper methods for asynchronous methods.
+/// </summary>
+public static class AsyncHelper
 {
-    using System;
-    using System.Threading;
-    using System.Threading.Tasks;
+    /// <summary>
+    /// The task factory to use for calling asynchronous methods.
+    /// </summary>
+    private static readonly TaskFactory TaskFactory = new TaskFactory(
+        CancellationToken.None,
+        TaskCreationOptions.None,
+        TaskContinuationOptions.None,
+        TaskScheduler.Default);
 
     /// <summary>
-    /// Helper methods for asynchronous methods.
+    /// Runs a asynchronous method synchronously.
     /// </summary>
-    public static class AsyncHelper
+    /// <typeparam name="TResult">The result type.</typeparam>
+    /// <param name="function">The asynchronous function to call.</param>
+    /// <returns>The return from the method.</returns>
+    public static TResult RunSync<TResult>(Func<Task<TResult>> function)
     {
-        /// <summary>
-        /// The task factory to use for calling asynchronous methods.
-        /// </summary>
-        private static readonly TaskFactory TaskFactory = new TaskFactory(
-            CancellationToken.None,
-            TaskCreationOptions.None,
-            TaskContinuationOptions.None,
-            TaskScheduler.Default);
-
-        /// <summary>
-        /// Runs a asynchronous method synchronously.
-        /// </summary>
-        /// <typeparam name="TResult">The result type.</typeparam>
-        /// <param name="function">The asynchronous function to call.</param>
-        /// <returns>The return from the method.</returns>
-        public static TResult RunSync<TResult>(Func<Task<TResult>> function)
+        if (function == null)
         {
-            if (function == null)
-            {
-                throw new ArgumentNullException(nameof(function));
-            }
-
-            return TaskFactory
-                .StartNew(function)
-                .Unwrap()
-                .GetAwaiter()
-                .GetResult();
+            throw new ArgumentNullException(nameof(function));
         }
 
-        /// <summary>
-        /// Runs a asynchronous method synchronously.
-        /// </summary>
-        /// <param name="function">The asynchronous function to call.</param>
-        public static void RunSync(Func<Task> function)
-        {
-            if (function == null)
-            {
-                throw new ArgumentNullException(nameof(function));
-            }
+        return TaskFactory
+            .StartNew(function)
+            .Unwrap()
+            .GetAwaiter()
+            .GetResult();
+    }
 
-            TaskFactory
-                .StartNew(function)
-                .Unwrap()
-                .GetAwaiter()
-                .GetResult();
+    /// <summary>
+    /// Runs a asynchronous method synchronously.
+    /// </summary>
+    /// <param name="function">The asynchronous function to call.</param>
+    public static void RunSync(Func<Task> function)
+    {
+        if (function == null)
+        {
+            throw new ArgumentNullException(nameof(function));
         }
+
+        TaskFactory
+            .StartNew(function)
+            .Unwrap()
+            .GetAwaiter()
+            .GetResult();
     }
 }

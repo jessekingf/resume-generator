@@ -1,8 +1,0 @@
-﻿{
-  "profiles": {
-    "Resume": {
-      "commandName": "Project",
-      "commandLineArgs": "..\\..\\..\\..\\..\\Example\\JohnDoeResume.json ..\\..\\..\\..\\..\\Example"
-    }
-  }
-}
