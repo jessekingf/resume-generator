@@ -55,7 +55,7 @@ public abstract class ChromiumPdfGeneratorBase : IPdfGenerator
     /// <returns>The asynchronous operation.</returns>
     protected virtual async Task ToPdfAsync(string htmlPath, string pdfPath)
     {
-        string chromePath = this.GetChromiumPath();
+        string? chromePath = this.GetChromiumPath();
         if (string.IsNullOrEmpty(chromePath))
         {
             if (!this.DownloadEnabled)
@@ -84,7 +84,7 @@ public abstract class ChromiumPdfGeneratorBase : IPdfGenerator
     /// Get the path to the Chromium executable.
     /// </summary>
     /// <returns>The Chromium executable path or null if not installed.</returns>
-    protected abstract string GetChromiumPath();
+    protected abstract string? GetChromiumPath();
 
     /// <summary>
     /// Downloads a Chromium instance.

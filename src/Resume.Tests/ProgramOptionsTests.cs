@@ -15,7 +15,7 @@ public class ProgramOptionsTests
     /// <summary>
     /// The file system mock to inject for the tests.
     /// </summary>
-    private Mock<IFileSystem> fileSystemMock;
+    private Mock<IFileSystem> fileSystemMock = new();
 
     /// <summary>
     /// Setup run before each test.
@@ -38,7 +38,7 @@ public class ProgramOptionsTests
         try
         {
             // Run the test.
-            ProgramOptions target = new ProgramOptions(args, null);
+            ProgramOptions target = new ProgramOptions(args, null!);
         }
         catch (ArgumentNullException ex)
         {
@@ -55,10 +55,10 @@ public class ProgramOptionsTests
     public void ProgramOptions_NullArgs_DisplayHelpSet()
     {
         // Setup the input.
-        string[] args = null;
+        string[]? args = null;
 
         // Run the test.
-        ProgramOptions target = new ProgramOptions(args, this.fileSystemMock.Object);
+        ProgramOptions target = new ProgramOptions(args!, this.fileSystemMock.Object);
 
         // Validate the results.
         Assert.IsTrue(target.DisplayHelp);

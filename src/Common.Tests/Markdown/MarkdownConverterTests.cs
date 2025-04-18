@@ -44,13 +44,13 @@ A paragraph with **bold** and *italic* text.";
     public void ToHTml_NullMarkdown_Throws()
     {
         // Setup the test.
-        string markdown = null;
+        string? markdown = null;
 
         try
         {
             // Run the test.
             MarkdownConverter target = new MarkdownConverter();
-            target.ToHtml(markdown);
+            target.ToHtml(markdown!);
         }
         catch (ArgumentException ex)
         {

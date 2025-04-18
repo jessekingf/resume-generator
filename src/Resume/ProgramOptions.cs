@@ -84,7 +84,7 @@ internal class ProgramOptions
     /// <summary>
     /// Gets the resume data input path.
     /// </summary>
-    public string InputPath
+    public string? InputPath
     {
         get;
         private set;
@@ -93,7 +93,7 @@ internal class ProgramOptions
     /// <summary>
     /// Gets the path to save the generated resumes to.
     /// </summary>
-    public string OutputPath
+    public string? OutputPath
     {
         get;
         private set;

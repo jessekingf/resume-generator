@@ -11,29 +11,29 @@ public class Address
     /// Gets or sets the street address.
     /// </summary>
     [JsonPropertyName("street")]
-    public string Street { get; set; }
+    public string? Street { get; set; }
 
     /// <summary>
     /// Gets or sets the postal code.
     /// </summary>
     [JsonPropertyName("postalCode")]
-    public string PostalCode { get; set; }
+    public string? PostalCode { get; set; }
 
     /// <summary>
     /// Gets or sets the city.
     /// </summary>
     [JsonPropertyName("city")]
-    public string City { get; set; }
+    public string? City { get; set; }
 
     /// <summary>
     /// Gets or sets the country code.
     /// </summary>
     [JsonPropertyName("countryCode")]
-    public string CountryCode { get; set; }
+    public string? CountryCode { get; set; }
 
     /// <summary>
     /// Gets or sets the region.
     /// </summary>
     [JsonPropertyName("region")]
-    public string Region { get; set; }
+    public string? Region { get; set; }
 }

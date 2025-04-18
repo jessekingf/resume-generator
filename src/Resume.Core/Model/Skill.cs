@@ -12,7 +12,7 @@ public class Skill
     /// Gets or sets the name of the skill.
     /// </summary>
     [JsonPropertyName("name")]
-    public string Name
+    public string? Name
     {
         get;
         set;
@@ -22,5 +22,5 @@ public class Skill
     /// Gets or sets the keywords for the skill.
     /// </summary>
     [JsonPropertyName("keywords")]
-    public IList<string> Keywords { get; set; }
+    public IList<string> Keywords { get; set; } = [];
 }

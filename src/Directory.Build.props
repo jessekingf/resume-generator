@@ -3,7 +3,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>disable</Nullable>
+    <Nullable>enable</Nullable>
     <NeutralLanguage>en-CA</NeutralLanguage>
   </PropertyGroup>
 

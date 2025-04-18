@@ -51,7 +51,7 @@ public class ChromiumPdfGeneratorWindows : ChromiumPdfGeneratorBase
     }
 
     /// <inheritdoc />
-    protected override string GetChromiumPath()
+    protected override string? GetChromiumPath()
     {
         // Check if Edge is already installed (typically available on most Windows installs).
         if (this.fileSystem.FileExists(EdgePath))
@@ -60,7 +60,7 @@ public class ChromiumPdfGeneratorWindows : ChromiumPdfGeneratorBase
         }
 
         // Check if Chrome is already installed.
-        string chromePath = this.GetInstalledChromePath();
+        string? chromePath = this.GetInstalledChromePath();
         if (!string.IsNullOrEmpty(chromePath))
         {
             return chromePath;
@@ -69,14 +69,14 @@ public class ChromiumPdfGeneratorWindows : ChromiumPdfGeneratorBase
         return null;
     }
 
-    private string GetInstalledChromePath()
+    private string? GetInstalledChromePath()
     {
         if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
             throw new PlatformNotSupportedException("Only supported in Windows.");
         }
 
-        string chromePath = Registry.GetValue(ChromeRegistryKey, ChromeRegistryValue, null) as string;
+        string? chromePath = Registry.GetValue(ChromeRegistryKey, ChromeRegistryValue, null) as string;
         if (string.IsNullOrEmpty(chromePath))
         {
             return null;

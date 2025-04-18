@@ -19,27 +19,27 @@ public class ResumeControllerTests
     /// <summary>
     /// The serializer to load the resume data with.
     /// </summary>
-    private ISerializer serializer;
+    private ISerializer serializer = new JsonSerializer();
 
     /// <summary>
     /// Handles converting Markdown.
     /// </summary>
-    private IMarkdownConverter markdownConverter;
+    private IMarkdownConverter markdownConverter = new MarkdownConverter();
 
     /// <summary>
     /// PDF document generator.
     /// </summary>
-    private Mock<IPdfGenerator> pdfGeneratorMock;
+    private Mock<IPdfGenerator> pdfGeneratorMock = new();
 
     /// <summary>
     /// File system mock for the unit tests.
     /// </summary>
-    private Mock<IFileSystem> fileSystemMock;
+    private Mock<IFileSystem> fileSystemMock = new();
 
     /// <summary>
     /// Markdown template mock for unit tests.
     /// </summary>
-    private Mock<ITemplate> markdownTemplateMock;
+    private Mock<ITemplate> markdownTemplateMock = new();
 
     /// <summary>
     /// Initialization run before each test.
@@ -76,7 +76,7 @@ public class ResumeControllerTests
     {
         try
         {
-            _ = new ResumeController(null, this.markdownConverter, this.pdfGeneratorMock.Object, this.fileSystemMock.Object, this.markdownTemplateMock.Object);
+            _ = new ResumeController(null!, this.markdownConverter, this.pdfGeneratorMock.Object, this.fileSystemMock.Object, this.markdownTemplateMock.Object);
         }
         catch (ArgumentNullException ex)
         {
@@ -94,7 +94,7 @@ public class ResumeControllerTests
     {
         try
         {
-            _ = new ResumeController(this.serializer, null, this.pdfGeneratorMock.Object, this.fileSystemMock.Object, this.markdownTemplateMock.Object);
+            _ = new ResumeController(this.serializer, null!, this.pdfGeneratorMock.Object, this.fileSystemMock.Object, this.markdownTemplateMock.Object);
         }
         catch (ArgumentNullException ex)
         {
@@ -112,7 +112,7 @@ public class ResumeControllerTests
     {
         try
         {
-            _ = new ResumeController(this.serializer, this.markdownConverter, null, this.fileSystemMock.Object, this.markdownTemplateMock.Object);
+            _ = new ResumeController(this.serializer, this.markdownConverter, null!, this.fileSystemMock.Object, this.markdownTemplateMock.Object);
         }
         catch (ArgumentNullException ex)
         {
@@ -130,7 +130,7 @@ public class ResumeControllerTests
     {
         try
         {
-            _ = new ResumeController(this.serializer, this.markdownConverter, this.pdfGeneratorMock.Object, null, this.markdownTemplateMock.Object);
+            _ = new ResumeController(this.serializer, this.markdownConverter, this.pdfGeneratorMock.Object, null!, this.markdownTemplateMock.Object);
         }
         catch (ArgumentNullException ex)
         {
@@ -148,7 +148,7 @@ public class ResumeControllerTests
     {
         try
         {
-            _ = new ResumeController(this.serializer, this.markdownConverter, this.pdfGeneratorMock.Object, this.fileSystemMock.Object, null);
+            _ = new ResumeController(this.serializer, this.markdownConverter, this.pdfGeneratorMock.Object, this.fileSystemMock.Object, null!);
         }
         catch (ArgumentNullException ex)
         {
@@ -165,14 +165,14 @@ public class ResumeControllerTests
     public void GenerateResume_NullResumeJsonPath_Throws()
     {
         // Setup the test.
-        string resumeJsonPath = null;
+        string? resumeJsonPath = null;
         string outputPath = @"c:\another\path";
 
         try
         {
             // Run the test.
             ResumeController target = new ResumeController(this.serializer, this.markdownConverter, this.pdfGeneratorMock.Object, this.fileSystemMock.Object, this.markdownTemplateMock.Object);
-            target.GenerateResume(resumeJsonPath, outputPath);
+            target.GenerateResume(resumeJsonPath!, outputPath);
         }
         catch (ArgumentException ex)
         {
@@ -216,13 +216,13 @@ public class ResumeControllerTests
     {
         // Setup the test.
         string resumeJsonPath = @"c:\path\resume.json";
-        string outputPath = null;
+        string? outputPath = null;
 
         try
         {
             // Run the test.
             ResumeController target = new ResumeController(this.serializer, this.markdownConverter, this.pdfGeneratorMock.Object, this.fileSystemMock.Object, this.markdownTemplateMock.Object);
-            target.GenerateResume(resumeJsonPath, outputPath);
+            target.GenerateResume(resumeJsonPath, outputPath!);
         }
         catch (ArgumentException ex)
         {

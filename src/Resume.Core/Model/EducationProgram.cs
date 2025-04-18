@@ -13,19 +13,19 @@ public class EducationProgram
     /// Gets or sets the institution.
     /// </summary>
     [JsonPropertyName("institution")]
-    public string Institution { get; set; }
+    public string? Institution { get; set; }
 
     /// <summary>
     /// Gets or sets the area of education.
     /// </summary>
     [JsonPropertyName("area")]
-    public string Area { get; set; }
+    public string? Area { get; set; }
 
     /// <summary>
     /// Gets or sets the study type.
     /// </summary>
     [JsonPropertyName("studyType")]
-    public string StudyType { get; set; }
+    public string? StudyType { get; set; }
 
     /// <summary>
     /// Gets or sets the start date.
@@ -43,11 +43,11 @@ public class EducationProgram
     /// Gets or sets the address of the institution.
     /// </summary>
     [JsonPropertyName("location")]
-    public Address Location { get; set; }
+    public Address? Location { get; set; }
 
     /// <summary>
     /// Gets or sets the education program highlights.
     /// </summary>
     [JsonPropertyName("highlights")]
-    public IList<string> Highlights { get; set; }
+    public IList<string> Highlights { get; set; } = [];
 }

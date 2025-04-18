@@ -1,4 +1,4 @@
-namespace Resume;
+﻿namespace Resume;
 
 using System.Runtime.InteropServices;
 using Common.Extensions;

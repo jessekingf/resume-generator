@@ -55,9 +55,13 @@ internal class Program
         {
             DisplayVersion();
         }
-        else
+        else if (!string.IsNullOrEmpty(options.InputPath) && !string.IsNullOrEmpty(options.OutputPath))
         {
             GenerateResume(host, options.InputPath, options.OutputPath);
+        }
+        else
+        {
+            DisplayHelp();
         }
     }
 
@@ -86,7 +90,7 @@ internal class Program
     /// </summary>
     private static void DisplayVersion()
     {
-        Version version = Assembly.GetEntryAssembly().GetName().Version;
-        Console.WriteLine(version.ToString());
+        Version? version = Assembly.GetEntryAssembly()?.GetName()?.Version;
+        Console.WriteLine(version);
     }
 }

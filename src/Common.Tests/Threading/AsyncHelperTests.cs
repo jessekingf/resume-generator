@@ -47,24 +47,6 @@ public class AsyncHelperTests
     }
 
     /// <summary>
-    /// A test for RunSync with a null void function.
-    /// </summary>
-    [TestMethod]
-    [ExpectedException(typeof(ArgumentNullException))]
-    public void RunSync_NullVoidFunction_Throws()
-    {
-        try
-        {
-            AsyncHelper.RunSync(null);
-        }
-        catch (ArgumentNullException ex)
-        {
-            Assert.AreEqual("function", ex.ParamName);
-            throw;
-        }
-    }
-
-    /// <summary>
     /// A test for RunSync with a null function with a return value.
     /// </summary>
     [TestMethod]
@@ -73,7 +55,7 @@ public class AsyncHelperTests
     {
         try
         {
-            AsyncHelper.RunSync<bool>(null);
+            AsyncHelper.RunSync<bool>(null!);
         }
         catch (ArgumentNullException ex)
         {

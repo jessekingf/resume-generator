@@ -46,7 +46,7 @@ public class TemplateContextTests
     [ExpectedException(typeof(ArgumentException))]
     public void TemplateContext_NullAlias_Throws()
     {
-        string alias = null;
+        string alias = null!;
         object value = new object();
 
         try
@@ -89,11 +89,11 @@ public class TemplateContextTests
     public void TemplateContext_NullValue_Throws()
     {
         string alias = "test";
-        object value = null;
+        object? value = null;
 
         try
         {
-            _ = new TemplateContext(alias, value);
+            _ = new TemplateContext(alias, value!);
         }
         catch (ArgumentNullException ex)
         {
@@ -127,13 +127,13 @@ public class TemplateContextTests
     [ExpectedException(typeof(ArgumentException))]
     public void SetValue_NullAlias_Throws()
     {
-        string alias = null;
+        string? alias = null;
         object value = new object();
 
         try
         {
             TemplateContext target = new TemplateContext();
-            target.SetValue(alias, value);
+            target.SetValue(alias!, value);
         }
         catch (ArgumentException ex)
         {
@@ -172,12 +172,12 @@ public class TemplateContextTests
     public void SetValue_NullValue_Throws()
     {
         string alias = "test";
-        object value = null;
+        object? value = null;
 
         try
         {
             TemplateContext target = new TemplateContext();
-            target.SetValue(alias, value);
+            target.SetValue(alias, value!);
         }
         catch (ArgumentNullException ex)
         {

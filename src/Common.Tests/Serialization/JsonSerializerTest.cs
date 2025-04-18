@@ -21,9 +21,10 @@ public class JsonSerializerTest
 
         // Run the test.
         JsonSerializer serializer = new JsonSerializer();
-        SerializableTestObject results = serializer.Deserialize<SerializableTestObject>(text);
+        SerializableTestObject? results = serializer.Deserialize<SerializableTestObject>(text);
 
         // Validate the results.
+        Assert.IsNotNull(results);
         Assert.AreEqual("This is a property to serialize.", results.PropertyOne);
         Assert.AreEqual("This is another property to serialize.", results.PropertyTwo);
     }
@@ -36,13 +37,13 @@ public class JsonSerializerTest
     public void Deserialize_NullJson_ThrowsArgumentException()
     {
         // Setup the test.
-        string text = null;
+        string? text = null;
 
         try
         {
             // Run the test.
             JsonSerializer serializer = new JsonSerializer();
-            serializer.Deserialize<SerializableTestObject>(text);
+            serializer.Deserialize<SerializableTestObject>(text!);
         }
         catch (ArgumentException ex)
         {
@@ -110,10 +111,10 @@ public class JsonSerializerTest
         {
             // Setup the test.
             JsonSerializer serializer = new JsonSerializer();
-            SerializableTestObject value = null;
+            SerializableTestObject? value = null;
 
             // Run the test.
-            serializer.Serialize<SerializableTestObject>(value);
+            serializer.Serialize<SerializableTestObject>(value!);
         }
         catch (ArgumentNullException ex)
         {

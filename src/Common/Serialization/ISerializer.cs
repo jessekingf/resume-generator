@@ -13,7 +13,7 @@ public interface ISerializer
     /// An instance of <typeparamref name="T" /> parsed from the text.
     /// </returns>
     /// <typeparam name="T">The type of object being deserialized.</typeparam>
-    T Deserialize<T>(string text);
+    T? Deserialize<T>(string text);
 
     /// <summary>
     /// Converts an instance of <typeparamref name="T" /> to text.

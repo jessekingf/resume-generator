@@ -18,7 +18,7 @@ public class LiquidTemplate : ITemplate
     /// <summary>
     /// Cached liquid template.
     /// </summary>
-    private FluidTemplate fluidTemplate;
+    private FluidTemplate? fluidTemplate;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="LiquidTemplate"/> class.
@@ -39,7 +39,7 @@ public class LiquidTemplate : ITemplate
     /// <summary>
     /// Gets the parsed template to render.
     /// </summary>
-    public string Template
+    public string? Template
     {
         get;
         private set;

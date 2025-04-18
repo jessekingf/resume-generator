@@ -30,7 +30,7 @@ public class InvalidOptionException : Exception
     /// </summary>
     /// <param name="message">The message that describes the error.</param>
     /// <param name="innerException">The inner exception.</param>
-    public InvalidOptionException(string message, Exception innerException)
+    public InvalidOptionException(string message, Exception? innerException)
         : this(message, null, innerException)
     {
     }
@@ -51,7 +51,7 @@ public class InvalidOptionException : Exception
     /// <param name="message">The message that describes the error.</param>
     /// <param name="optionName">The name of the invalid program option that caused the exception.</param>
     /// <param name="innerException">The inner exception.</param>
-    public InvalidOptionException(string message, string optionName, Exception innerException)
+    public InvalidOptionException(string message, string? optionName, Exception? innerException)
         : base(message, innerException)
     {
         this.OptionName = optionName;
@@ -60,7 +60,7 @@ public class InvalidOptionException : Exception
     /// <summary>
     /// Gets the name of the program option that caused the exception.
     /// </summary>
-    public string OptionName
+    public string? OptionName
     {
         get;
     }

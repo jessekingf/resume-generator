@@ -11,7 +11,7 @@ public class SerializableTestObject
     /// Gets or sets the first property for serialization testing.
     /// </summary>
     [JsonPropertyName("propertyOne")]
-    public string PropertyOne
+    public string? PropertyOne
     {
         get;
         set;
@@ -21,7 +21,7 @@ public class SerializableTestObject
     /// Gets or sets the second property for serialization testing.
     /// </summary>
     [JsonPropertyName("propertyTwo")]
-    public string PropertyTwo
+    public string? PropertyTwo
     {
         get;
         set;

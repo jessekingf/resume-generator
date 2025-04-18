@@ -63,11 +63,11 @@ public class LiquidTemplateTests
     [ExpectedException(typeof(ArgumentNullException))]
     public void LiquidTemplate_NullTemplate_Throws()
     {
-        string template = null;
+        string? template = null;
 
         try
         {
-            LiquidTemplate target = new LiquidTemplate(template);
+            LiquidTemplate target = new LiquidTemplate(template!);
         }
         catch (ArgumentNullException ex)
         {
@@ -111,12 +111,12 @@ public class LiquidTemplateTests
     [ExpectedException(typeof(ArgumentNullException))]
     public void Parse_NullTemplate_Throws()
     {
-        string template = null;
+        string? template = null;
 
         try
         {
             LiquidTemplate target = new LiquidTemplate();
-            target.Parse(template);
+            target.Parse(template!);
         }
         catch (ArgumentNullException ex)
         {
@@ -171,12 +171,12 @@ public class LiquidTemplateTests
     [ExpectedException(typeof(ArgumentNullException))]
     public void RegisterType_Nullype_Throws()
     {
-        Type type = null;
+        Type? type = null;
 
         try
         {
             LiquidTemplate target = new LiquidTemplate();
-            target.RegisterType(type);
+            target.RegisterType(type!);
         }
         catch (ArgumentNullException ex)
         {
@@ -192,12 +192,12 @@ public class LiquidTemplateTests
     public void Render_ValidContext_Success()
     {
         // TODO: Setup the test to cover all features of liquid templates.
-        string template = "Hello {{ p.Firstname }} {{ p.Lastname }}";
+        string template = "Hello {{ p.FirstName }} {{ p.LastName }}";
 
         Person model = new Person()
         {
-            Firstname = "Jim",
-            Lastname = "Bob",
+            FirstName = "Jim",
+            LastName = "Bob",
         };
         TemplateContext context = new TemplateContext("p", model);
 
@@ -218,8 +218,8 @@ public class LiquidTemplateTests
 
         Person model = new Person()
         {
-            Firstname = "Jim",
-            Lastname = "Bob",
+            FirstName = "Jim",
+            LastName = "Bob",
         };
         TemplateContext context = new TemplateContext("p", model);
 
@@ -239,8 +239,8 @@ public class LiquidTemplateTests
     {
         Person model = new Person()
         {
-            Firstname = "Jim",
-            Lastname = "Bob",
+            FirstName = "Jim",
+            LastName = "Bob",
         };
         TemplateContext context = new TemplateContext("p", model);
 
@@ -270,7 +270,7 @@ public class LiquidTemplateTests
         {
             LiquidTemplate target = new LiquidTemplate(template);
             target.RegisterType(typeof(Person));
-            target.Render(null);
+            target.Render(null!);
         }
         catch (ArgumentNullException ex)
         {
@@ -287,7 +287,7 @@ public class LiquidTemplateTests
         /// <summary>
         /// Gets or sets the first sample parameter.
         /// </summary>
-        public string Firstname
+        public string? FirstName
         {
             get;
             set;
@@ -296,7 +296,7 @@ public class LiquidTemplateTests
         /// <summary>
         /// Gets or sets the second sample parameter.
         /// </summary>
-        public string Lastname
+        public string? LastName
         {
             get;
             set;

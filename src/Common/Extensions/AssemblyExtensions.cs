@@ -20,28 +20,26 @@ public static class AssemblyExtensions
     /// <returns>The contents of the embedded resource file.</returns>
     public static string ReadResourceFile(this Assembly assembly, string filename)
     {
-        if (assembly == null)
-        {
-            throw new ArgumentNullException(nameof(assembly));
-        }
+        ArgumentNullException.ThrowIfNull(assembly);
 
         if (string.IsNullOrEmpty(filename))
         {
             throw new ArgumentException("Value cannot be null or empty.", nameof(filename));
         }
 
-        string assemblyName = assembly.GetName().Name;
-        using (Stream stream = assembly.GetManifestResourceStream($"{assemblyName}.{filename}"))
+        string? assemblyName = assembly.GetName().Name;
+        if (string.IsNullOrEmpty(assemblyName))
         {
-            if (stream == null)
-            {
-                throw new FileNotFoundException($"The resource file '{filename}' could not be found in assembly '{assemblyName}'.", filename);
-            }
-
-            using (StreamReader reader = new StreamReader(stream))
-            {
-                return reader.ReadToEnd();
-            }
+            throw new FileNotFoundException("Failed to get assembly for resource file '{filename}'");
         }
+
+        using Stream? stream = assembly.GetManifestResourceStream($"{assemblyName}.{filename}");
+        if (stream == null)
+        {
+            throw new FileNotFoundException($"The resource file '{filename}' could not be found in assembly '{assemblyName}'.", filename);
+        }
+
+        using StreamReader reader = new StreamReader(stream);
+        return reader.ReadToEnd();
     }
 }

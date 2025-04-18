@@ -104,7 +104,11 @@ public class ResumeController
 
         // Load the resume data from the JSON file.
         string fileName = Path.GetFileNameWithoutExtension(resumeJsonPath);
-        Resume resume = this.serializer.Deserialize<Resume>(this.fileSystem.ReadAllText(resumeJsonPath));
+        Resume? resume = this.serializer.Deserialize<Resume>(this.fileSystem.ReadAllText(resumeJsonPath));
+        if (resume == null)
+        {
+            throw new InvalidOperationException($"Failed to load resume JSON file: {resumeJsonPath}");
+        }
 
         // Generate the markdown resume.
         string markdownPath = Path.Combine(outputPath, $"{fileName}.md");
@@ -155,9 +159,15 @@ public class ResumeController
         if (externalCss)
         {
             // Save the HTML file with the default standalone CSS file.
+            string? dir = Path.GetDirectoryName(path);
+            if (string.IsNullOrEmpty(dir))
+            {
+                throw new InvalidOperationException($"Failed to get directory from path: {path}");
+            }
+
             styleElement = $"<link rel=\"stylesheet\" href=\"{DefaultCssFileName}\" />";
             this.fileSystem.WriteAllText(
-                Path.Combine(Path.GetDirectoryName(path), DefaultCssFileName),
+                Path.Combine(dir, DefaultCssFileName),
                 cssContent);
         }
         else

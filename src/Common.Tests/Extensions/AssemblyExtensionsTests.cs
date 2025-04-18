@@ -39,12 +39,12 @@ public class AssemblyExtensionsTests
     {
         // Setup the test.
         Assembly assembly = Assembly.GetExecutingAssembly();
-        string filename = null;
+        string? filename = null;
 
         try
         {
             // Run the test.
-            string results = assembly.ReadResourceFile(filename);
+            string results = assembly.ReadResourceFile(filename!);
         }
         catch (ArgumentException ex)
         {

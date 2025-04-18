@@ -35,7 +35,7 @@ public class ChromiumPdfGeneratorLinux : ChromiumPdfGeneratorBase
     }
 
     /// <inheritdoc />
-    protected override string GetChromiumPath()
+    protected override string? GetChromiumPath()
     {
         if (this.fileSystem.FileExists(ChromiumInstallPath))
         {

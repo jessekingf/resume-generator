@@ -15,7 +15,7 @@ public class JsonSerializer : ISerializer
     /// An instance of <typeparamref name="T" /> parsed from the JSON text.
     /// </returns>
     /// <typeparam name="T">The type of object being deserialized.</typeparam>
-    public T Deserialize<T>(string text)
+    public T? Deserialize<T>(string text)
     {
         if (string.IsNullOrEmpty(text))
         {
