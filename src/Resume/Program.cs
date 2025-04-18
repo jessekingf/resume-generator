@@ -3,6 +3,8 @@
 using System;
 using System.Reflection;
 using Common.Extensions;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Resume.Core;
 using Resume.Properties;
 
@@ -17,13 +19,15 @@ internal class Program
     /// <param name="args">The application arguments.</param>
     public static void Main(string[] args)
     {
+        using IHost host = Startup.CreateHost(args);
+
         try
         {
             // Parse the command line arguments.
             ProgramOptions options = new ProgramOptions(args);
 
             // Process the options.
-            ProcessOptions(options);
+            ProcessOptions(host, options);
         }
         catch (InvalidOptionException ex)
         {
@@ -39,8 +43,9 @@ internal class Program
     /// <summary>
     /// Processes and executes the specified program options.
     /// </summary>
+    /// <param name="host">The application host.</param>
     /// <param name="options">The options parsed from the program arguments.</param>
-    private static void ProcessOptions(ProgramOptions options)
+    private static void ProcessOptions(IHost host, ProgramOptions options)
     {
         if (options.DisplayHelp)
         {
@@ -52,18 +57,19 @@ internal class Program
         }
         else
         {
-            GenerateResume(options.InputPath, options.OutputPath);
+            GenerateResume(host, options.InputPath, options.OutputPath);
         }
     }
 
     /// <summary>
     /// Generates resumes from the provided JSON file.
     /// </summary>
+    /// <param name="host">The application host.</param>
     /// <param name="resumeJsonPath">The path to the JSON document containing the resume data.</param>
     /// <param name="outputPath">The output path to save the generated resumes to.</param>
-    private static void GenerateResume(string resumeJsonPath, string outputPath)
+    private static void GenerateResume(IHost host, string resumeJsonPath, string outputPath)
     {
-        ResumeController resumeController = new ResumeController();
+        ResumeController resumeController = host.Services.GetRequiredService<ResumeController>();
         resumeController.GenerateResume(resumeJsonPath, outputPath);
     }
 

@@ -7,8 +7,12 @@
     <PublishReadyToRun>false</PublishReadyToRun>
     <SelfContained>false</SelfContained>
   </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Mono.Options" Version="6.12.0.148" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.1" />
   </ItemGroup>
 
   <ItemGroup>

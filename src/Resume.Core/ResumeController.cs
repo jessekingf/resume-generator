@@ -18,11 +18,6 @@ using Resume.Core.Model;
 public class ResumeController
 {
     /// <summary>
-    /// The filename of the default markdown template.
-    /// </summary>
-    private const string DefaultMarkdownTemplateName = "ResumeMarkdownTemplate.liquid";
-
-    /// <summary>
     /// The filename of the default HTML template.
     /// </summary>
     private const string DefaultHtmlTemplateName = "ResumeHtmlTemplate.html";
@@ -53,13 +48,9 @@ public class ResumeController
     private readonly IFileSystem fileSystem;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="ResumeController"/> class.
+    /// The resume markdown template.
     /// </summary>
-    public ResumeController()
-        : this(new JsonSerializer(), new MarkdownConverter(), new ChromiumPdfGeneratorLinux(), new FileSystem())
-    {
-        // TODO: Setup proper DI to inject the Windows or Linux based generator accordingly.
-    }
+    private readonly ITemplate markdownTemplate;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ResumeController"/> class.
@@ -68,16 +59,19 @@ public class ResumeController
     /// <param name="markdownConverter">Handles converting Markdown.</param>
     /// <param name="pdfGenerator">PDF document generator.</param>
     /// <param name="fileSystem">Used to read and save documents from the file system.</param>
+    /// <param name="markdownTemplate">The resume template.</param>
     public ResumeController(
         ISerializer serializer,
         IMarkdownConverter markdownConverter,
         IPdfGenerator pdfGenerator,
-        IFileSystem fileSystem)
+        IFileSystem fileSystem,
+        ITemplate markdownTemplate)
     {
         this.serializer = serializer ?? throw new ArgumentNullException(nameof(serializer));
         this.markdownConverter = markdownConverter ?? throw new ArgumentNullException(nameof(markdownConverter));
         this.pdfGenerator = pdfGenerator ?? throw new ArgumentNullException(nameof(pdfGenerator));
         this.fileSystem = fileSystem ?? throw new ArgumentNullException(nameof(fileSystem));
+        this.markdownTemplate = markdownTemplate ?? throw new ArgumentNullException(nameof(markdownTemplate));
     }
 
     /// <summary>
@@ -88,30 +82,6 @@ public class ResumeController
     /// <remarks>Overwrites the output if the files already exist.</remarks>
     public void GenerateResume(string resumeJsonPath, string outputPath)
     {
-        // The resume template is not provided; so create and use the default template.
-        string templateText = Assembly.GetExecutingAssembly().ReadResourceFile(DefaultMarkdownTemplateName);
-        LiquidTemplate template = new(templateText);
-
-        // Register the model types with the template.
-        template.RegisterType(typeof(Resume));
-        template.RegisterType(typeof(EducationProgram));
-        template.RegisterType(typeof(Job));
-        template.RegisterType(typeof(Skill));
-        template.RegisterType(typeof(Address));
-
-        // Generate the resume with the default template.
-        this.GenerateResume(resumeJsonPath, outputPath, template);
-    }
-
-    /// <summary>
-    /// Generates resumes from the provided JSON file.
-    /// </summary>
-    /// <param name="resumeJsonPath">The path to the JSON document containing the resume data.</param>
-    /// <param name="outputPath">The output path to save the generated resumes to.</param>
-    /// <param name="markdownTemplate">The template to use to render the markdown resume.</param>
-    /// <remarks>Overwrites the output if the files already exist.</remarks>
-    public void GenerateResume(string resumeJsonPath, string outputPath, ITemplate markdownTemplate)
-    {
         if (string.IsNullOrEmpty(resumeJsonPath))
         {
             throw new ArgumentException("Path cannot be null or empty", nameof(resumeJsonPath));
@@ -120,11 +90,6 @@ public class ResumeController
         if (string.IsNullOrEmpty(outputPath))
         {
             throw new ArgumentException("Path cannot be null or empty", nameof(outputPath));
-        }
-
-        if (markdownTemplate == null)
-        {
-            throw new ArgumentNullException(nameof(markdownTemplate));
         }
 
         if (!this.fileSystem.FileExists(resumeJsonPath))
@@ -143,7 +108,7 @@ public class ResumeController
 
         // Generate the markdown resume.
         string markdownPath = Path.Combine(outputPath, $"{fileName}.md");
-        string markdown = this.GenerateMarkDownResume(resume, markdownTemplate);
+        string markdown = this.GenerateMarkDownResume(resume);
         this.fileSystem.WriteAllText(markdownPath, markdown);
 
         // Generate the HTML resume from the markdown resume.
@@ -159,14 +124,13 @@ public class ResumeController
     /// Generates a markdown resume.
     /// </summary>
     /// <param name="resume">The resume data to generate the markdown with.</param>
-    /// <param name="markdownTemplate">The template to use to render the markdown resume.</param>
     /// <returns>The generated markdown syntax.</returns>
-    private string GenerateMarkDownResume(Resume resume, ITemplate markdownTemplate)
+    private string GenerateMarkDownResume(Resume resume)
     {
         TemplateContext templateContext = new();
         templateContext.SetValue("r", resume);
 
-        return markdownTemplate.Render(templateContext);
+        return this.markdownTemplate.Render(templateContext);
     }
 
     /// <summary>
