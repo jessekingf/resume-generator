@@ -19,15 +19,6 @@ public abstract class ChromiumPdfGeneratorBase : IPdfGenerator
     private const string ChromiumDownloadFolder = ".local-chromium";
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="ChromiumPdfGeneratorBase"/> class.
-    /// </summary>
-    /// <param name="downloadEnabled">Whether to download Chrome if it is not installed.</param>
-    protected ChromiumPdfGeneratorBase(bool downloadEnabled = false)
-    {
-        this.DownloadEnabled = downloadEnabled;
-    }
-
-    /// <summary>
     /// Gets or sets a value indicating whether to download Chrome if it is not installed.
     /// </summary>
     public bool DownloadEnabled

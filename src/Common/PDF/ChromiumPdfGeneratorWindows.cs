@@ -1,8 +1,8 @@
 ﻿namespace Common.PDF;
 
 using System;
-using System.IO;
 using System.Runtime.InteropServices;
+using Common.IO;
 using Microsoft.Win32;
 
 /// <summary>
@@ -32,25 +32,29 @@ public class ChromiumPdfGeneratorWindows : ChromiumPdfGeneratorBase
     private const string ChromeExecutable = "chrome.exe";
 
     /// <summary>
+    /// Provides access to the file system.
+    /// </summary>
+    private readonly IFileSystem fileSystem;
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="ChromiumPdfGeneratorWindows"/> class.
     /// </summary>
-    /// <param name="downloadEnabled">Whether to download Chrome if it is not installed.</param>
-    public ChromiumPdfGeneratorWindows(bool downloadEnabled = false)
-    : base(downloadEnabled)
+    /// <param name="fileSystem">Provides access to the file system.</param>
+    public ChromiumPdfGeneratorWindows(IFileSystem fileSystem)
     {
         if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
             throw new PlatformNotSupportedException("Only supported in Windows.");
         }
 
-        // TODO: Inject filesystem.
+        this.fileSystem = fileSystem ?? throw new ArgumentNullException(nameof(fileSystem));
     }
 
     /// <inheritdoc />
     protected override string GetChromiumPath()
     {
         // Check if Edge is already installed (typically available on most Windows installs).
-        if (File.Exists(EdgePath))
+        if (this.fileSystem.FileExists(EdgePath))
         {
             return EdgePath;
         }
