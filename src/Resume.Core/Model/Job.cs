@@ -25,7 +25,7 @@ public class Job
     /// Gets or sets the start date.
     /// </summary>
     [JsonPropertyName("startDate")]
-    public DateTime? StartDate { get; set; }
+    public required DateTime StartDate { get; set; }
 
     /// <summary>
     /// Gets or sets the end date.
@@ -43,7 +43,7 @@ public class Job
     /// Gets or sets the address of the job position.
     /// </summary>
     [JsonPropertyName("location")]
-    public Address? Location { get; set; }
+    public required Address Location { get; set; }
 
     /// <summary>
     /// Gets or sets the job highlights.

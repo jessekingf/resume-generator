@@ -12,7 +12,7 @@ public class Skill
     /// Gets or sets the name of the skill.
     /// </summary>
     [JsonPropertyName("name")]
-    public string? Name
+    public required string Name
     {
         get;
         set;

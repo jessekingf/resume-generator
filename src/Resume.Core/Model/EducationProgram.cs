@@ -31,7 +31,7 @@ public class EducationProgram
     /// Gets or sets the start date.
     /// </summary>
     [JsonPropertyName("startDate")]
-    public DateTime? StartDate { get; set; }
+    public required DateTime StartDate { get; set; }
 
     /// <summary>
     /// Gets or sets the end date.
@@ -43,7 +43,7 @@ public class EducationProgram
     /// Gets or sets the address of the institution.
     /// </summary>
     [JsonPropertyName("location")]
-    public Address? Location { get; set; }
+    public required Address Location { get; set; }
 
     /// <summary>
     /// Gets or sets the education program highlights.

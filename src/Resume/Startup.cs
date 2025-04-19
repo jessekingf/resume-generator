@@ -1,16 +1,14 @@
 ﻿namespace Resume;
 
 using System.Runtime.InteropServices;
-using Common.Extensions;
 using Common.IO;
 using Common.Markdown;
 using Common.PDF;
 using Common.Serialization;
-using Common.Text;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Resume.Core;
-using Resume.Core.Model;
+using Resume.Core.Renderers.Markdown;
 
 /// <summary>
 /// Configures the application on startup.
@@ -39,9 +37,12 @@ internal class Startup
     private static void ConfigureServices(IServiceCollection services)
     {
         services.AddTransient<ResumeController>();
+
         services.AddTransient<ISerializer, JsonSerializer>();
         services.AddTransient<IMarkdownConverter, MarkdownConverter>();
         services.AddTransient<IFileSystem, FileSystem>();
+
+        services.AddTransient<IResumeTextRenderer, ResumeMarkdownRenderer>();
 
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
@@ -51,21 +52,5 @@ internal class Startup
         {
             services.AddTransient<IPdfGenerator, ChromiumPdfGeneratorLinux>();
         }
-
-        services.AddTransient<ITemplate>(provider =>
-        {
-            string templateText = typeof(ResumeController).Assembly
-                .ReadResourceFile("ResumeMarkdownTemplate.liquid");
-
-            LiquidTemplate template = new(templateText);
-
-            template.RegisterType(typeof(Resume));
-            template.RegisterType(typeof(EducationProgram));
-            template.RegisterType(typeof(Job));
-            template.RegisterType(typeof(Skill));
-            template.RegisterType(typeof(Address));
-
-            return template;
-        });
     }
 }

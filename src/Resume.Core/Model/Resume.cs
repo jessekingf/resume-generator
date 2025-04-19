@@ -20,25 +20,25 @@ public class Resume
     /// </summary>
     /// <remarks>For example the current job title of the applicant.</remarks>
     [JsonPropertyName("label")]
-    public string? Label { get; set; }
+    public required string Label { get; set; }
 
     /// <summary>
     /// Gets or sets the email address of the applicant.
     /// </summary>
     [JsonPropertyName("email")]
-    public string? Email { get; set; }
+    public required string Email { get; set; }
 
     /// <summary>
     /// Gets or sets the phone number of the applicant.
     /// </summary>
     [JsonPropertyName("phone")]
-    public string? Phone { get; set; }
+    public required string Phone { get; set; }
 
     /// <summary>
     /// Gets or sets the address of the applicant.
     /// </summary>
     [JsonPropertyName("location")]
-    public Address? Location { get; set; }
+    public required Address Location { get; set; }
 
     /// <summary>
     /// Gets or sets the personal website of the applicant.

@@ -9,8 +9,8 @@ using Common.IO;
 using Common.Markdown;
 using Common.PDF;
 using Common.Serialization;
-using Common.Text;
 using Resume.Core.Model;
+using Resume.Core.Renderers.Markdown;
 
 /// <summary>
 /// Handles generating and converting resumes.
@@ -48,9 +48,9 @@ public class ResumeController
     private readonly IFileSystem fileSystem;
 
     /// <summary>
-    /// The resume markdown template.
+    /// The resume markdown renderer.
     /// </summary>
-    private readonly ITemplate markdownTemplate;
+    private readonly IResumeTextRenderer markdownRenderer;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ResumeController"/> class.
@@ -59,19 +59,19 @@ public class ResumeController
     /// <param name="markdownConverter">Handles converting Markdown.</param>
     /// <param name="pdfGenerator">PDF document generator.</param>
     /// <param name="fileSystem">Used to read and save documents from the file system.</param>
-    /// <param name="markdownTemplate">The resume template.</param>
+    /// <param name="markdownRenderer">The resume markdown renderer.</param>
     public ResumeController(
         ISerializer serializer,
         IMarkdownConverter markdownConverter,
         IPdfGenerator pdfGenerator,
         IFileSystem fileSystem,
-        ITemplate markdownTemplate)
+        IResumeTextRenderer markdownRenderer)
     {
         this.serializer = serializer ?? throw new ArgumentNullException(nameof(serializer));
         this.markdownConverter = markdownConverter ?? throw new ArgumentNullException(nameof(markdownConverter));
         this.pdfGenerator = pdfGenerator ?? throw new ArgumentNullException(nameof(pdfGenerator));
         this.fileSystem = fileSystem ?? throw new ArgumentNullException(nameof(fileSystem));
-        this.markdownTemplate = markdownTemplate ?? throw new ArgumentNullException(nameof(markdownTemplate));
+        this.markdownRenderer = markdownRenderer ?? throw new ArgumentNullException(nameof(markdownRenderer));
     }
 
     /// <summary>
@@ -112,7 +112,7 @@ public class ResumeController
 
         // Generate the markdown resume.
         string markdownPath = Path.Combine(outputPath, $"{fileName}.md");
-        string markdown = this.GenerateMarkDownResume(resume);
+        string markdown = this.markdownRenderer.Render(resume);
         this.fileSystem.WriteAllText(markdownPath, markdown);
 
         // Generate the HTML resume from the markdown resume.
@@ -122,19 +122,6 @@ public class ResumeController
         // Generate the PDF resume from the HTML resume.
         string pdfPath = Path.Combine(outputPath, $"{fileName}.pdf");
         this.pdfGenerator.FromHtml(htmlPath, pdfPath);
-    }
-
-    /// <summary>
-    /// Generates a markdown resume.
-    /// </summary>
-    /// <param name="resume">The resume data to generate the markdown with.</param>
-    /// <returns>The generated markdown syntax.</returns>
-    private string GenerateMarkDownResume(Resume resume)
-    {
-        TemplateContext templateContext = new();
-        templateContext.SetValue("r", resume);
-
-        return this.markdownTemplate.Render(templateContext);
     }
 
     /// <summary>

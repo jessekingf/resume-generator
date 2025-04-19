@@ -6,9 +6,9 @@ using Common.IO;
 using Common.Markdown;
 using Common.PDF;
 using Common.Serialization;
-using Common.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Resume.Core.Renderers.Markdown;
 
 /// <summary>
 /// A test fixture for the <see cref="ResumeController"/>  class.
@@ -39,7 +39,7 @@ public class ResumeControllerTests
     /// <summary>
     /// Markdown template mock for unit tests.
     /// </summary>
-    private Mock<ITemplate> markdownTemplateMock = new();
+    private Mock<IResumeTextRenderer> markdownTemplateMock = new();
 
     /// <summary>
     /// Initialization run before each test.
@@ -54,7 +54,7 @@ public class ResumeControllerTests
         // Mock the other dependencies
         this.pdfGeneratorMock = new Mock<IPdfGenerator>();
         this.fileSystemMock = new Mock<IFileSystem>();
-        this.markdownTemplateMock = new Mock<ITemplate>();
+        this.markdownTemplateMock = new Mock<IResumeTextRenderer>();
     }
 
     /// <summary>
@@ -152,7 +152,7 @@ public class ResumeControllerTests
         }
         catch (ArgumentNullException ex)
         {
-            Assert.AreEqual("markdownTemplate", ex.ParamName);
+            Assert.AreEqual("markdownRenderer", ex.ParamName);
             throw;
         }
     }
