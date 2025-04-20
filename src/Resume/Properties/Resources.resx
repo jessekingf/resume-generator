@@ -145,7 +145,7 @@ Parameters:
   <data name="ProgramHelp" xml:space="preserve">
     <value>Usage:
 
-resume.exe [options] &lt;json resume&gt; &lt;output directory&gt;
+resume [options] &lt;json resume&gt; &lt;output directory&gt;
 
 Options:
 

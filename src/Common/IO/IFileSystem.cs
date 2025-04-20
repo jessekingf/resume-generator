@@ -41,4 +41,11 @@ public interface IFileSystem
     /// <param name="destFileName">The name of the destination file. This cannot be a directory or an existing file.</param>
     /// <param name="overwrite">Whether to overwrite the destination file if it already exists.</param>
     void CopyFile(string sourceFileName, string destFileName, bool overwrite = false);
+
+    /// <summary>
+    /// Returns the absolute path for the specified string.
+    /// </summary>
+    /// <param name="path">The path to get the full path from.</param>
+    /// <returns>The absolute path for the specified string.</returns>
+    string GetFullPath(string path);
 }

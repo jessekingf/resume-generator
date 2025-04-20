@@ -58,4 +58,14 @@ public class FileSystem : IFileSystem
     {
         File.Copy(sourceFileName, destFileName, overwrite);
     }
+
+    /// <summary>
+    /// Returns the absolute path for the specified string.
+    /// </summary>
+    /// <param name="path">The path to get the full path from.</param>
+    /// <returns>The absolute path for the specified string.</returns>
+    public string GetFullPath(string path)
+    {
+        return Path.GetFullPath(path);
+    }
 }

@@ -7,6 +7,7 @@ using Common.PDF;
 using Common.Serialization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Resume.Commands;
 using Resume.Core;
 using Resume.Core.Renderers.Markdown;
 
@@ -35,6 +36,19 @@ internal class Startup
     /// </summary>
     /// <param name="services">The application service collection.</param>
     private static void ConfigureServices(IServiceCollection services)
+    {
+        RegisterCommands(services);
+        RegisterResumeGeneration(services);
+    }
+
+    private static void RegisterCommands(IServiceCollection services)
+    {
+        services.AddTransient<HelpCommand>();
+        services.AddTransient<ResumeCommand>();
+        services.AddTransient<VersionCommand>();
+    }
+
+    private static void RegisterResumeGeneration(IServiceCollection services)
     {
         services.AddTransient<ResumeController>();
 
