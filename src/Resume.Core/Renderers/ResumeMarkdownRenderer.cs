@@ -1,5 +1,6 @@
-﻿namespace Resume.Core.Renderers.Markdown;
+﻿namespace Resume.Core.Renderers;
 
+using System.Globalization;
 using System.Text;
 using Resume.Core.Model;
 
@@ -39,14 +40,19 @@ public class ResumeMarkdownRenderer : IResumeTextRenderer
         this.AppendLine($"### {r.Label}");
         this.AppendLine();
         this.AppendLine($"> [{r.Email}](mailto:{r.Email}) | [{r.Phone}](tel:{r.Phone?.Replace("-", string.Empty, StringComparison.CurrentCulture)})  ");
-        this.AppendLine($"> [{r.Website}]({r.Website})  ");
+
+        if (!string.IsNullOrEmpty(r.Website))
+        {
+            this.AppendLine($"> [{r.Website}]({r.Website})  ");
+        }
+
         this.AppendLine($"> {r.Location.Street}, {r.Location.City}, {r.Location.Region}, {r.Location.PostalCode}");
         this.AppendLine();
     }
 
     private void RenderSummary(string? summary, IList<string> highlights)
     {
-        this.AppendLine("## Professional Summary");
+        this.AppendLine("## Professional Summary".ToUpper(CultureInfo.CurrentCulture));
         this.AppendLine();
         this.AppendLine(summary);
         this.RenderHighlights(highlights);
@@ -55,7 +61,7 @@ public class ResumeMarkdownRenderer : IResumeTextRenderer
 
     private void RenderJobs(IList<Job> jobs)
     {
-        this.AppendLine("## Work Experience");
+        this.AppendLine("## Work Experience".ToUpper(CultureInfo.CurrentCulture));
         this.AppendLine();
 
         foreach (Job job in jobs)
@@ -69,20 +75,15 @@ public class ResumeMarkdownRenderer : IResumeTextRenderer
         this.AppendLine($"**{job.Position}**, _**{job.Company}**_  ");
         this.AppendLine($"{job.Location.City}, {job.Location.Region}  ");
         this.AppendLine($"*{job.StartDate:MMM yyyy} – {(job.EndDate.HasValue ? job.EndDate.Value.ToString("MMM yyyy") : "Present")}*");
-
-        if (!string.IsNullOrEmpty(job.Summary))
-        {
-            this.AppendLine();
-            this.AppendLine(job.Summary);
-        }
-
+        this.AppendLine();
+        this.AppendLine(job.Summary);
         this.RenderHighlights(job.Highlights);
         this.AppendLine();
     }
 
     private void RenderSkills(IList<Skill> skills)
     {
-        this.AppendLine("## Skills / Tools");
+        this.AppendLine("## Technical Skills".ToUpper(CultureInfo.CurrentCulture));
         this.AppendLine();
 
         foreach (Skill skill in skills)
@@ -95,7 +96,7 @@ public class ResumeMarkdownRenderer : IResumeTextRenderer
 
     private void RenderEducation(IList<EducationProgram> programs)
     {
-        this.AppendLine("## Education");
+        this.AppendLine("## Education".ToUpper(CultureInfo.CurrentCulture));
         this.AppendLine();
 
         foreach (EducationProgram program in programs)
@@ -106,7 +107,7 @@ public class ResumeMarkdownRenderer : IResumeTextRenderer
 
     private void RenderProgram(EducationProgram program)
     {
-        this.AppendLine($"**{program.Area}**, **{program.StudyType}**, **_{program.Institution}_**  ");
+        this.AppendLine($"**{program.Area}**, **{program.StudyType}**, _**{program.Institution}**_  ");
         this.AppendLine($"{program.Location.City}, {program.Location.Region}  ");
         this.AppendLine($"*{program.StartDate:MMM yyyy} – {(program.EndDate.HasValue ? program.EndDate.Value.ToString("MMM yyyy") : "Present")}*");
         this.RenderHighlights(program.Highlights);

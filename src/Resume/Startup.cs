@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Resume.Commands;
 using Resume.Core;
-using Resume.Core.Renderers.Markdown;
+using Resume.Core.Renderers;
 
 /// <summary>
 /// Configures the application on startup.

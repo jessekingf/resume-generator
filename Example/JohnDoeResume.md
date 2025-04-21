@@ -5,7 +5,7 @@
 > [http://johndoe.com](http://johndoe.com)  
 > 290 Bremner Blvd, Toronto, Ontario, M5V 3L9
 
-## Professional Summary
+## PROFESSIONAL SUMMARY
 
 A profession summary/profile can go here with some career highlights listed below, both of which are optional.
 - 10+ years of experience
@@ -13,7 +13,7 @@ A profession summary/profile can go here with some career highlights listed belo
 - Experienced database developer
 - Etc.
 
-## Work Experience
+## WORK EXPERIENCE
 
 **Senior Software Developer**, _**Company Name**_  
 Toronto, Ontario  
@@ -28,10 +28,10 @@ A description/summary of the job position with some highlights listed below (bot
 **Software Developer**, _**Another Company**_  
 Toronto, Ontario  
 *Jan 2008 – Jan 2014*
+
 - Some more impressive stuff
 - Programming once in a while
 - More stuff
-- etc.
 
 **Junior Software Developer**, _**Yet another company**_  
 Toronto, Ontario  
@@ -39,7 +39,7 @@ Toronto, Ontario
 
 A quick description...
 
-## Skills / Tools
+## TECHNICAL SKILLS
 
 - Programming Languages – C#, C++, Java
 - Web Development – JavaScript, Angular, HTML, CSS
@@ -47,16 +47,16 @@ A quick description...
 - Cloud Technologies – Microsoft Azure, AWS, Kubernetes
 - SDLC – Git, GitHub, Bitbucket, JIRA
 
-## Education
+## EDUCATION
 
-**Computer Science**, **Master**, **_A University_**  
+**Computer Science**, **Master**, _**A University**_  
 Toronto, Ontario  
 *Jan 2018 – Present*
 - 4.0 GPA
 - Internship
 - Etc.
 
-**Computer Science**, **Bachelor**, **_Another University_**  
+**Computer Science**, **Bachelor**, _**Another University**_  
 Toronto, Ontario  
 *Jan 2000 – Jan 2004*
 

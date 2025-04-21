@@ -10,7 +10,7 @@ using Common.Markdown;
 using Common.PDF;
 using Common.Serialization;
 using Resume.Core.Model;
-using Resume.Core.Renderers.Markdown;
+using Resume.Core.Renderers;
 
 /// <summary>
 /// Handles generating and converting resumes.

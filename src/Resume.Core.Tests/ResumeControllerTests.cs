@@ -8,7 +8,7 @@ using Common.PDF;
 using Common.Serialization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using Resume.Core.Renderers.Markdown;
+using Resume.Core.Renderers;
 
 /// <summary>
 /// A test fixture for the <see cref="ResumeController"/>  class.

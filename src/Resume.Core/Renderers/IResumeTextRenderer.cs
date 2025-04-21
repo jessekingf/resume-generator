@@ -1,4 +1,4 @@
-﻿namespace Resume.Core.Renderers.Markdown;
+﻿namespace Resume.Core.Renderers;
 
 using Resume.Core.Model;
 
