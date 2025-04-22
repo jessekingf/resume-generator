@@ -10,15 +10,18 @@ A tool for generating a resume from JSON data into multiple formats:
 
 The following must be installed to run the application:
 
-**.NET**
+### .NET
+
 - Download .NET 9 [here](ttps://dotnet.microsoft.com/download/dotnet/9.0).
 
-**On Windows**:
+### On Windows
+
 - One of the following web browsers Windows (required for PDF generation):
   - [Microsoft Edge](https://www.microsoft.com/en-us/edge/download)
   - [Google Chrome](https://www.google.com/chrome/)
 
-**On Linux**:
+### On Linux
+
 - Chromium Web Browser (required for PDF generation):
   - Debian-based distributions: `sudo apt install chromium`
 - Microsoft fonts (required for default resume template):

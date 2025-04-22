@@ -4,6 +4,8 @@
     "editorconfig.editorconfig",
     "streetsidesoftware.code-spell-checker",
     "redhat.vscode-xml",
-    "timheuer.resx-editor"
+    "timheuer.resx-editor",
+    "davidanson.vscode-markdownlint",
+    "yzhang.markdown-all-in-one"
   ]
 }
