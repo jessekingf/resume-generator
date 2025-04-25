@@ -56,16 +56,21 @@ public class ResumeMarkdownRenderer : IResumeTextRenderer
         this.AppendLine();
         this.AppendLine(summary);
         this.RenderHighlights(highlights);
-        this.AppendLine();
     }
 
     private void RenderJobs(IList<Job> jobs)
     {
-        this.AppendLine("## Work Experience".ToUpper(CultureInfo.CurrentCulture));
+        if (jobs.Count == 0)
+        {
+            return;
+        }
+
         this.AppendLine();
+        this.AppendLine("## Work Experience".ToUpper(CultureInfo.CurrentCulture));
 
         foreach (Job job in jobs)
         {
+            this.AppendLine();
             this.RenderJob(job);
         }
     }
@@ -74,21 +79,35 @@ public class ResumeMarkdownRenderer : IResumeTextRenderer
     {
         this.AppendLine($"**{job.Position}**, _**{job.Company}**_  ");
         this.AppendLine($"{job.Location.City}, {job.Location.Region}  ");
-        this.AppendLine($"*{job.StartDate:MMM yyyy} – {(job.EndDate.HasValue ? job.EndDate.Value.ToString("MMM yyyy") : "Present")}*");
-        this.AppendLine();
-        this.AppendLine(job.Summary);
+        this.AppendLine($"_{job.StartDate:MMM yyyy} – {(job.EndDate.HasValue ? job.EndDate.Value.ToString("MMM yyyy") : "Present")}_");
+
+        if (!string.IsNullOrEmpty(job.Summary))
+        {
+            this.AppendLine();
+            this.AppendLine(job.Summary);
+        }
+
         this.RenderHighlights(job.Highlights);
-        this.AppendLine();
     }
 
     private void RenderSkills(IList<Skill> skills)
     {
-        this.AppendLine("## Technical Skills".ToUpper(CultureInfo.CurrentCulture));
+        if (skills.Count == 0)
+        {
+            return;
+        }
+
         this.AppendLine();
+        this.AppendLine("## Technical Skills".ToUpper(CultureInfo.CurrentCulture));
 
         foreach (Skill skill in skills)
         {
-            this.AppendLine($"- {skill.Name} – {string.Join(", ", skill.Keywords)}");
+            this.AppendLine();
+            this.Append($"- {skill.Name}");
+            if (skill.Keywords.Count > 0)
+            {
+                this.Append($" – {string.Join(", ", skill.Keywords)}");
+            }
         }
 
         this.AppendLine();
@@ -96,11 +115,17 @@ public class ResumeMarkdownRenderer : IResumeTextRenderer
 
     private void RenderEducation(IList<EducationProgram> programs)
     {
-        this.AppendLine("## Education".ToUpper(CultureInfo.CurrentCulture));
+        if (programs.Count == 0)
+        {
+            return;
+        }
+
         this.AppendLine();
+        this.AppendLine("## Education".ToUpper(CultureInfo.CurrentCulture));
 
         foreach (EducationProgram program in programs)
         {
+            this.AppendLine();
             this.RenderProgram(program);
         }
     }
@@ -109,16 +134,30 @@ public class ResumeMarkdownRenderer : IResumeTextRenderer
     {
         this.AppendLine($"**{program.Area}**, **{program.StudyType}**, _**{program.Institution}**_  ");
         this.AppendLine($"{program.Location.City}, {program.Location.Region}  ");
-        this.AppendLine($"*{program.StartDate:MMM yyyy} – {(program.EndDate.HasValue ? program.EndDate.Value.ToString("MMM yyyy") : "Present")}*");
+        this.AppendLine($"_{program.StartDate:MMM yyyy} – {(program.EndDate.HasValue ? program.EndDate.Value.ToString("MMM yyyy") : "Present")}_");
         this.RenderHighlights(program.Highlights);
-        this.AppendLine();
     }
 
     private void RenderHighlights(IList<string> highlights)
     {
+        if (highlights.Count == 0)
+        {
+            return;
+        }
+
+        this.AppendLine();
+
         foreach (string highlight in highlights)
         {
             this.AppendLine($"- {highlight}");
+        }
+    }
+
+    private void Append(string? value)
+    {
+        if (!string.IsNullOrEmpty(value))
+        {
+            this.builder.Append(value);
         }
     }
 

@@ -8,6 +8,7 @@
 ## PROFESSIONAL SUMMARY
 
 A profession summary/profile can go here with some career highlights listed below, both of which are optional.
+
 - 10+ years of experience
 - Full stack software developer
 - Experienced database developer
@@ -17,9 +18,10 @@ A profession summary/profile can go here with some career highlights listed belo
 
 **Senior Software Developer**, _**Company Name**_  
 Toronto, Ontario  
-*Jan 2014 – Present*
+_Jan 2014 – Present_
 
 A description/summary of the job position with some highlights listed below (both optional).
+
 - Started the company
 - Worked on some awesome project
 - Improved performance on a thing
@@ -27,7 +29,7 @@ A description/summary of the job position with some highlights listed below (bot
 
 **Software Developer**, _**Another Company**_  
 Toronto, Ontario  
-*Jan 2008 – Jan 2014*
+_Jan 2008 – Jan 2014_
 
 - Some more impressive stuff
 - Programming once in a while
@@ -35,7 +37,7 @@ Toronto, Ontario
 
 **Junior Software Developer**, _**Yet another company**_  
 Toronto, Ontario  
-*Jan 2004 – Jan 2008*
+_Jan 2004 – Jan 2008_
 
 A quick description...
 
@@ -51,12 +53,12 @@ A quick description...
 
 **Computer Science**, **Master**, _**A University**_  
 Toronto, Ontario  
-*Jan 2018 – Present*
+_Jan 2018 – Present_
+
 - 4.0 GPA
 - Internship
 - Etc.
 
 **Computer Science**, **Bachelor**, _**Another University**_  
 Toronto, Ontario  
-*Jan 2000 – Jan 2004*
-
+_Jan 2000 – Jan 2004_
