@@ -32,6 +32,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example", "Example", "{F383
 		..\Example\JohnDoeResume.md = ..\Example\JohnDoeResume.md
 		..\Example\JohnDoeResume.pdf = ..\Example\JohnDoeResume.pdf
 		..\docs\Setup.md = ..\docs\Setup.md
+		..\Example\JohnDoeResume.txt = ..\Example\JohnDoeResume.txt
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Resume.Core.Tests", "Resume.Core.Tests\Resume.Core.Tests.csproj", "{041942D9-325D-42B5-971F-06001336842F}"

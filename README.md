@@ -2,9 +2,10 @@
 
 A tool for generating a resume from JSON data into multiple formats:
 
-1. Markdown
-2. HTML
-3. PDF
+1. Plain text
+2. Markdown
+3. HTML
+4. PDF
 
 ## Prerequisites
 
@@ -116,9 +117,10 @@ The JSON resume format:
 
 ## Example
 
-Example JSON input and generated markdown, HTML, and PDF resumes:
+Example JSON input and generated plain text, markdown, HTML, and PDF resumes:
 
 - **JSON** - [JohnDoeResume.json](Example/JohnDoeResume.json)
+- **Plain text** - [JohnDoeResume.txt](Example/JohnDoeResume.txt)
 - **Markdown** - [JohnDoeResume.md](Example/JohnDoeResume.md)
 - **HTML** - [JohnDoeResume.html](Example/JohnDoeResume.html)
 - **PDF** - [JohnDoeResume.pdf](Example/JohnDoeResume.pdf)

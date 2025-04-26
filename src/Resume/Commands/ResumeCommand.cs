@@ -1,4 +1,4 @@
-namespace Resume.Commands;
+﻿namespace Resume.Commands;
 
 using Common.IO;
 using Resume.Core;

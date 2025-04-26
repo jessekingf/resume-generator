@@ -48,9 +48,14 @@ public class ResumeController
     private readonly IFileSystem fileSystem;
 
     /// <summary>
+    /// The resume plain text renderer.
+    /// </summary>
+    private readonly IResumeTextRenderer plainTextRenderer;
+
+    /// <summary>
     /// The resume markdown renderer.
     /// </summary>
-    private readonly IResumeTextRenderer markdownRenderer;
+    private readonly IResumeMarkdownRenderer markdownRenderer;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ResumeController"/> class.
@@ -59,18 +64,21 @@ public class ResumeController
     /// <param name="markdownConverter">Handles converting Markdown.</param>
     /// <param name="pdfGenerator">PDF document generator.</param>
     /// <param name="fileSystem">Used to read and save documents from the file system.</param>
+    /// <param name="plainTextRenderer">The resume plain text renderer.</param>
     /// <param name="markdownRenderer">The resume markdown renderer.</param>
     public ResumeController(
         ISerializer serializer,
         IMarkdownConverter markdownConverter,
         IPdfGenerator pdfGenerator,
         IFileSystem fileSystem,
-        IResumeTextRenderer markdownRenderer)
+        IResumeTextRenderer plainTextRenderer,
+        IResumeMarkdownRenderer markdownRenderer)
     {
         this.serializer = serializer ?? throw new ArgumentNullException(nameof(serializer));
         this.markdownConverter = markdownConverter ?? throw new ArgumentNullException(nameof(markdownConverter));
         this.pdfGenerator = pdfGenerator ?? throw new ArgumentNullException(nameof(pdfGenerator));
         this.fileSystem = fileSystem ?? throw new ArgumentNullException(nameof(fileSystem));
+        this.plainTextRenderer = plainTextRenderer ?? throw new ArgumentNullException(nameof(plainTextRenderer));
         this.markdownRenderer = markdownRenderer ?? throw new ArgumentNullException(nameof(markdownRenderer));
     }
 
@@ -110,14 +118,19 @@ public class ResumeController
             throw new InvalidOperationException($"Failed to load resume JSON file: {resumeJsonPath}");
         }
 
+        // Generate the plain text resume.
+        string plainTextPath = Path.Combine(outputPath, $"{fileName}.txt");
+        string textResume = this.plainTextRenderer.Render(resume);
+        this.fileSystem.WriteAllText(plainTextPath, textResume);
+
         // Generate the markdown resume.
         string markdownPath = Path.Combine(outputPath, $"{fileName}.md");
-        string markdown = this.markdownRenderer.Render(resume);
-        this.fileSystem.WriteAllText(markdownPath, markdown);
+        string markdownResume = this.markdownRenderer.Render(resume);
+        this.fileSystem.WriteAllText(markdownPath, markdownResume);
 
         // Generate the HTML resume from the markdown resume.
         string htmlPath = Path.Combine(outputPath, $"{fileName}.html");
-        this.GenerateHtmlResume(markdown, resume.Name, htmlPath);
+        this.GenerateHtmlResume(markdownResume, resume.Name, htmlPath);
 
         // Generate the PDF resume from the HTML resume.
         string pdfPath = Path.Combine(outputPath, $"{fileName}.pdf");

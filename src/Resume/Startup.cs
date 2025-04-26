@@ -56,7 +56,8 @@ internal class Startup
         services.AddTransient<IMarkdownConverter, MarkdownConverter>();
         services.AddTransient<IFileSystem, FileSystem>();
 
-        services.AddTransient<IResumeTextRenderer, ResumeMarkdownRenderer>();
+        services.AddTransient<IResumeTextRenderer, ResumePlainTextRenderer>();
+        services.AddTransient<IResumeMarkdownRenderer, ResumeMarkdownRenderer>();
 
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
