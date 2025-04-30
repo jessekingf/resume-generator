@@ -63,4 +63,25 @@ public abstract class ResumeTextRenderer : IResumeTextRenderer
     {
         this.builder.Clear();
     }
+
+    /// <summary>
+    /// Formats the date to a string for display in the resume.
+    /// </summary>
+    /// <param name="date">The date to format.</param>
+    /// <returns>The formatted date.</returns>
+    protected virtual string FormatDate(DateTime date)
+    {
+        return date.ToString("MMM yyyy");
+    }
+
+    /// <summary>
+    /// Formats the date range for display in the resume.
+    /// </summary>
+    /// <param name="startDate">The start date.</param>
+    /// <param name="endDate">The end date, or null if present.</param>
+    /// <returns>The formatted date range.</returns>
+    protected virtual string FormatDateRange(DateTime startDate, DateTime? endDate)
+    {
+        return $"{this.FormatDate(startDate)} – {(endDate.HasValue ? this.FormatDate(endDate.Value) : "Present")}";
+    }
 }

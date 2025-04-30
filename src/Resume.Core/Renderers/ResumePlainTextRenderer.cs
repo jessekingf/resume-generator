@@ -82,7 +82,7 @@ public class ResumePlainTextRenderer : ResumeTextRenderer
     {
         this.AppendLine($"{job.Position}, {job.Company}");
         this.AppendLine($"{job.Location.City}, {job.Location.Region}");
-        this.AppendLine($"{job.StartDate:MMM yyyy} – {(job.EndDate.HasValue ? job.EndDate.Value.ToString("MMM yyyy") : "Present")}");
+        this.AppendLine(this.FormatDateRange(job.StartDate, job.EndDate));
 
         if (!string.IsNullOrEmpty(job.Summary))
         {
@@ -137,7 +137,7 @@ public class ResumePlainTextRenderer : ResumeTextRenderer
     {
         this.AppendLine($"{program.Area}**, **{program.StudyType}**, _**{program.Institution}**_");
         this.AppendLine($"{program.Location.City}, {program.Location.Region}");
-        this.AppendLine($"{program.StartDate:MMM yyyy} – {(program.EndDate.HasValue ? program.EndDate.Value.ToString("MMM yyyy") : "Present")}");
+        this.AppendLine(this.FormatDateRange(program.StartDate, program.EndDate));
         this.RenderHighlights(program.Highlights);
     }
 
